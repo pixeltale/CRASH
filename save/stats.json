@@ -1,0 +1,14 @@
+{
+  "modes": {
+    "training": {
+      "playtime": 0
+    },
+    "freebattle": {
+      "playtime": 215.55
+    },
+    "watch": {
+      "playtime": 0
+    }
+  },
+  "playtime": 215.55
+}

@@ -1,0 +1,320 @@
+;---------------------------------------------------------------------------
+; Air Evade
+[Statedef 60]
+type    = A
+physics = A
+anim = 60
+sprpriority = 1
+ctrl = 0
+velset = 0, 0
+
+[State 0, EVA Cancel]
+type 		= MapAdd
+triggerall	= !TIME
+triggerall	= map(BreakPoints) >= 2
+trigger1 		= prevstateno = [200,1030]
+map 			= "BreakPoints"
+value 		= -2
+ignorehitpause = 1
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = time < 10
+time = 1
+add = 0,0,100
+mul = 256,256,256
+invertall = 0
+color = 256
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time < 10
+value = ,NA,SA,HA,NP,SP,HP
+time = 1
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = time <= 20
+flag = noairguard
+
+[State 100, 1]
+type = VelSet
+trigger1 = time = 0
+x = 5.5
+
+[State - Air Option Limiter - Airdash]
+type = mapadd
+triggerall = prevstateno != [200,1030]
+trigger1 = time = 0
+map = "AirAction"
+value = 1
+[State - Airdash Momentum Preserve]
+type = mapset
+trigger1 = time < 15
+map = "ADM" ;AirDash Momentum Preserve
+value = 1
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = prevstateno = [200,1030]
+trigger1 = time = 4
+value = 1
+[State 0, CtrlSet]
+type = ChangeState
+trigger1 = time = 20
+value = 50
+
+;---------------------------------------------------------------------------
+; Air Evade Back
+[Statedef 61]
+type    = A
+physics = A
+anim = 61
+sprpriority = 1
+ctrl = 0
+
+[State 0, EVA Cancel]
+type 		= MapAdd
+triggerall	= !TIME
+triggerall	= map(BreakPoints) >= 2
+trigger1 		= prevstateno = [200,1030]
+map 			= "BreakPoints"
+value 		= -2
+ignorehitpause = 1
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = time < 10
+time = 1
+add = 0,0,100
+mul = 256,256,256
+invertall = 0
+color = 256
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time < 10
+value = ,NA,SA,HA,NP,SP,HP
+time = 1
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = time <= 20
+flag = noairguard
+
+[State 100, 1]
+type = VelSet
+trigger1 = time = 0
+x = -5.5
+
+[State - Air Option Limiter - Airdash]
+type = mapadd
+triggerall = prevstateno != [200,1030]
+trigger1 = time = 0
+map = "AirAction"
+value = 1
+[State - Airdash Momentum Preserve]
+type = mapset
+trigger1 = time < 15
+map = "ADM" ;AirDash Momentum Preserve
+value = 1
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = prevstateno = [200,1030]
+trigger1 = time = 4
+value = 1
+[State 0, CtrlSet]
+type = ChangeState
+trigger1 = time = 20
+value = 50
+
+;---------------------------------------------------------------------------
+; Ground Evade
+[Statedef 65]
+type    = S
+physics = S
+anim = 60
+sprpriority = 1
+velset = 5
+ctrl = 0
+
+[State 0, EVA Cancel]
+type 		= MapAdd
+triggerall	= !TIME
+triggerall	= map(BreakPoints) >= 2
+trigger1 		= prevstateno = [200,1030]
+map 			= "BreakPoints"
+value 		= -2
+ignorehitpause = 1
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = time < 10
+time = 1
+add = 0,0,100
+mul = 256,256,256
+invertall = 0
+color = 256
+color = 256
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time < 10
+value = ,NA,SA,HA,NP,SP,HP
+time = 1
+[State 100, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+flag2 = NoAutoTurn
+
+[State 100, 1]
+type = VelSet
+trigger1 = 1
+x = 5.5
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = prevstateno = [200,1030]
+trigger1 = time = 4
+value = 1
+[State 100, 4]
+type = ChangeState
+trigger1 = time = 15
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;Ground Evade Back
+[Statedef 66]
+type    = S
+physics = S
+ctrl = 0
+anim = 61
+sprpriority = 1
+
+[State 0, EVA Cancel]
+type 		= MapAdd
+triggerall	= !TIME
+triggerall	= map(BreakPoints) >= 2
+trigger1 		= prevstateno = [200,1030]
+map 			= "BreakPoints"
+value 		= -2
+ignorehitpause = 1
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = time < 10
+time = 1
+add = 0,0,100
+mul = 256,256,256
+invertall = 0
+color = 256
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time < 10
+value = ,NA,SA,HA,NP,SP,HP
+time = 1
+[State 100, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+flag2 = NoAutoTurn
+
+[State 100, 1]
+type = VelSet
+trigger1 = 1
+x = -3.5
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = prevstateno = [200,1030]
+trigger1 = time = 4
+value = 1
+[State 100, 4]
+type = ChangeState
+trigger1 = time = 20
+value = 0
+ctrl = 1
+
+
+;---------------------------------------------------------------------------
+; Run F
+[Statedef 100]
+type    = S
+physics = S
+anim = 100
+sprpriority = 1
+velset = 5
+ctrl = 1
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = time % 2
+x = 2.5
+[State 0, VelSet]
+type = PosAdd
+trigger1 = p2dist x < 30 && abs(p2dist y) < 50
+x = -1
+[State 0, VelSet]
+type = VelAdd
+triggerall = prevstateno = 2000
+trigger1 = vel x <= 18
+x = 4
+[State 0, VelSet]
+type = VelSet
+triggerall = anim = 99
+trigger1 = vel x >= 28
+x = 28
+
+[State 100, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+
+[State 100, 3] ;Prevent from turning
+type = AssertSpecial
+trigger1 = 1
+flag = NoAutoTurn
+
+[State 100, 4]
+type = ChangeState
+trigger1 = command !="holdfwd" && time> (7 + 10*(prevstateno = 2000)) 
+value = 101
+ctrl = 1
+
+
+
+;---------------------------------------------------------------------------
+;Backdash
+[Statedef 105]
+type    = S
+physics = S
+ctrl = 1
+anim = 105
+sprpriority = 1
+
+[State 100, 1]
+type = VelSet
+trigger1 = !time
+x = -10
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time =13
+x = -3
+y = 0
+
+[State 100, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+
+[State 100, 3] ;Prevent from turning
+type = AssertSpecial
+trigger1 = 1
+flag = NoAutoTurn
+
+[State 100, 4]
+type = ChangeState
+trigger1 = animtime = 0
+value = 11
+ctrl = 1
