@@ -2,8 +2,8 @@ Version: nightly
 Build Time: 2025-09-09
 
 Error log:
-.\external\script\start.lua:1588: chars/GASH/GASH.cns:115:
-Invalid data: ,
+.\external\script\start.lua:1588: data/COMMON.cns:6820:
+Invalid data: [
 stack traceback:
 	[G]: in function 'game'
 	.\external\script\start.lua:1588: in function 'f_game'

@@ -6817,11 +6817,59 @@ ignorehitpause = 1
 [State 0, Explod]
 type = Explod
 triggerall = teamside = 1
-trigger1 = map(BreakPoints) && !numexplod(1010 + map(BreakPoints))
+trigger1 = map(BreakPoints) > 0 && !numexplod(1011)
 anim = F1010
-ID = 1010 + map(BreakPoints)
+ID = 1011
 postype = left
-pos = 5 + 18*map(BreakPoints), 140
+pos = 5 + 18, 140
+scale = 0.45, 0.45
+removetime = -1
+sprPriority = 10
+ignorehitpause = 1
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 1
+trigger1 = map(BreakPoints) > 1 && !numexplod(1012)
+anim = F1010
+ID = 1012
+postype = left
+pos = 5 + 18*2, 140
+scale = 0.45, 0.45
+removetime = -1
+sprPriority = 10
+ignorehitpause = 1
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 1
+trigger1 = map(BreakPoints) > 2 && !numexplod(1013)
+anim = F1010
+ID = 1013
+postype = left
+pos = 5 + 18*3, 140
+scale = 0.45, 0.45
+removetime = -1
+sprPriority = 10
+ignorehitpause = 1
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 1
+trigger1 = map(BreakPoints) > 3 && !numexplod(1014)
+anim = F1010
+ID = 1014
+postype = left
+pos = 5 + 18*4, 140
+scale = 0.45, 0.45
+removetime = -1
+sprPriority = 10
+ignorehitpause = 1
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 1
+trigger1 = map(BreakPoints) > 4 && !numexplod(1015)
+anim = F1010
+ID = 1015
+postype = left
+pos = 5 + 18*5, 140
 scale = 0.45, 0.45
 removetime = -1
 sprPriority = 10
@@ -6829,9 +6877,57 @@ ignorehitpause = 1
 [State 0, Explod]
 type = Explod
 triggerall = teamside = 2
-trigger1 = map(BreakPoints) && !numexplod(1010 + map(BreakPoints))
+trigger1 = map(BreakPoints) > 0 && !numexplod(1011)
 anim = F1010
-ID = 1010 + map(BreakPoints)
+ID = 1011
+postype = right
+pos = -5 + -18*map(BreakPoints), 140
+scale = -0.45, 0.45
+removetime = -1
+sprPriority = 10
+ignorehitpause = 1
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 2
+trigger1 = map(BreakPoints) > 1 && !numexplod(1012)
+anim = F1010
+ID = 1012
+postype = right
+pos = -5 + -18*map(BreakPoints), 140
+scale = -0.45, 0.45
+removetime = -1
+sprPriority = 10
+ignorehitpause = 1
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 2
+trigger1 = map(BreakPoints) > 2 && !numexplod(1013)
+anim = F1010
+ID = 1013
+postype = right
+pos = -5 + -18*map(BreakPoints), 140
+scale = -0.45, 0.45
+removetime = -1
+sprPriority = 10
+ignorehitpause = 1
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 2
+trigger1 = map(BreakPoints) > 3 && !numexplod(1014)
+anim = F1010
+ID = 1014
+postype = right
+pos = -5 + -18*map(BreakPoints), 140
+scale = -0.45, 0.45
+removetime = -1
+sprPriority = 10
+ignorehitpause = 1
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 2
+trigger1 = map(BreakPoints) > 4 && !numexplod(1015)
+anim = F1010
+ID = 1015
 postype = right
 pos = -5 + -18*map(BreakPoints), 140
 scale = -0.45, 0.45

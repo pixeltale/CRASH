@@ -169,7 +169,7 @@ flag2 = NoAutoTurn
 [State 100, 1]
 type = VelSet
 trigger1 = 1
-x = 5.5
+x = 6.5
 
 [State 0, CtrlSet]
 type = CtrlSet
@@ -222,7 +222,7 @@ flag2 = NoAutoTurn
 [State 100, 1]
 type = VelSet
 trigger1 = 1
-x = -3.5
+x = -6.5
 
 [State 0, CtrlSet]
 type = CtrlSet
