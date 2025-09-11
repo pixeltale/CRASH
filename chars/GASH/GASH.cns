@@ -39,7 +39,7 @@ jump.back = -2.55    ;Jump back Speed (x, y)
 jump.fwd = 2.33       ;Jump forward Speed (x, y)
 runjump.back = -1,-8.1 ;Running jump speeds (opt)
 runjump.fwd = 7.5,-8      ;.
-airjump.neu = 0,-6.5      ;.
+airjump.neu = 0,-7      ;.
 airjump.back = -2      ;Air jump speeds (opt)
 airjump.fwd = 2.2         ;.
 air.gethit.groundrecover = -.15,-3.5  ;Velocity for ground recovery state (x, y) **MUGEN 1.0**
@@ -107,7 +107,7 @@ params = camerapos x, map(evacancel)
 [State 0, Jump Cancel] ;Fireball
 type 		= MapAdd
 triggerall	= numhelper(1001)
-triggerall	= helper(1001), movehit = 1
+triggerall	= helper(1001), movehit = 1 && P2, movetype = H
 triggerall	= map(BreakPoints) < 5
 trigger1 		= !map(ComboStateCheck)
 map 			= "BreakPoints"
