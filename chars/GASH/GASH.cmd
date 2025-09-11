@@ -98,9 +98,9 @@ type = ChangeState
 value = 60
 triggerall = command != "holdback"
 triggerall = command = "EVADE"
-triggerall = statetype = A && map(AirActions) < const(AirActionMax)
+triggerall = statetype = A
 triggerall = pos y<-30 || vel y > 0
-trigger1 = ctrl || map(EvaCancel) && map(BreakPoints) >= 2
+trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && map(BreakPoints) >= 2
 
 ;Air Evade Back
 [State -1, Airdash]
@@ -108,9 +108,9 @@ type = ChangeState
 value = 61
 triggerall = command = "holdback"
 triggerall = command = "EVADE"
-triggerall = statetype = A && map(AirActions) < const(AirActionMax)
+triggerall = statetype = A
 triggerall = pos y<-30 || vel y > 0
-trigger1 = ctrl || map(EvaCancel) && map(BreakPoints) >= 2
+trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && map(BreakPoints) >= 2
 
 ;Evade Forward
 [State -1, Airdash]
@@ -159,14 +159,14 @@ trigger1 = ctrl || (stateno = [200,220] || stateno = [400,431]) && movecontact
 type = changeState
 value = 1000
 triggerall = command = "SPECIAL"
-triggerall = statetype != A && (!numhelper(1001) || stateno  = [65,66])
+triggerall = statetype != A
 trigger1 = ctrl || (stateno = [200,220] || stateno = [400,431]) && movecontact
 ;5S: Divider
 [State -1, DICER ALTERNATIVE]
 type = changeState
 value = 1005
 triggerall = command = "SPECIAL"
-triggerall = statetype = A && (!numhelper(1001) || stateno = [60,61])
+triggerall = statetype = A
 trigger1 = ctrl || (stateno = 600) && movecontact || stateno = [60,61]
 
 

@@ -21,7 +21,7 @@ ignorehitpause = 1
 type = PalFX
 trigger1 = time < 10
 time = 1
-add = 0,0,100
+add = 0, 0, 100
 mul = 256,256,256
 invertall = 0
 color = 256
@@ -85,7 +85,7 @@ ignorehitpause = 1
 type = PalFX
 trigger1 = time < 10
 time = 1
-add = 0,0,100
+add = 0, 0, 100
 mul = 256,256,256
 invertall = 0
 color = 256
@@ -132,21 +132,27 @@ value = 50
 [Statedef 65]
 type    = S
 physics = S
-anim = 60
+anim = 65
 sprpriority = 1
 velset = 5
 ctrl = 0
 
+[State 0, VarSet]
+type = VarSet
+trigger1 = !time
+sysvar(1) = prevstateno = [200,1030]
+
 [State 0, PlayerPush]
 type = PlayerPush
-trigger1 = 1
+triggerall = time < 10
+trigger1 = !sysvar(1)
 value = 0
 
 [State 0, EVA Cancel]
 type 		= MapAdd
 triggerall	= !TIME
 triggerall	= map(BreakPoints) >= 2
-trigger1 		= prevstateno = [200,1030]
+trigger1 		= sysvar(1)
 map 			= "BreakPoints"
 value 		= -2
 ignorehitpause = 1
@@ -155,10 +161,9 @@ ignorehitpause = 1
 type = PalFX
 trigger1 = time < 10
 time = 1
-add = 0,0,100
+add = 0, 0, 100
 mul = 256,256,256
 invertall = 0
-color = 256
 color = 256
 [State 0, NotHitBy]
 type = NotHitBy
@@ -173,8 +178,12 @@ flag2 = NoAutoTurn
 
 [State 100, 1]
 type = VelSet
-trigger1 = 1
-x = 6.5
+trigger1 = time < 10
+x = 9
+[State 100, 1]
+type = VelMul
+trigger1 = time = 11
+x = 0.6
 
 [State 0, CtrlSet]
 type = CtrlSet
@@ -193,19 +202,25 @@ ctrl = 1
 type    = S
 physics = S
 ctrl = 0
-anim = 61
+anim = 66
 sprpriority = 1
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = !time
+sysvar(1) = prevstateno = [200,1030]
 
 [State 0, PlayerPush]
 type = PlayerPush
-trigger1 = 1
+triggerall = time < 10
+trigger1 = !sysvar(1)
 value = 0
 
 [State 0, EVA Cancel]
 type 		= MapAdd
 triggerall	= !TIME
 triggerall	= map(BreakPoints) >= 2
-trigger1 		= prevstateno = [200,1030]
+trigger1 		= sysvar(1)
 map 			= "BreakPoints"
 value 		= -2
 ignorehitpause = 1
@@ -214,7 +229,7 @@ ignorehitpause = 1
 type = PalFX
 trigger1 = time < 10
 time = 1
-add = 0,0,100
+add = 0, 0, 100
 mul = 256,256,256
 invertall = 0
 color = 256
@@ -231,8 +246,12 @@ flag2 = NoAutoTurn
 
 [State 100, 1]
 type = VelSet
-trigger1 = 1
-x = -6.5
+trigger1 = time < 10
+x = -7.5
+[State 100, 1]
+type = VelMul
+trigger1 = time = 11
+x = 0.6
 
 [State 0, CtrlSet]
 type = CtrlSet

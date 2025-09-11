@@ -63,7 +63,7 @@ ctrl = 0
 ; Stand to Crouch
 [Statedef 10]
 type    = C
-physics = N
+physics = C
 anim = 10
 
 [State 10, 3]
@@ -1211,6 +1211,15 @@ air.velocity = -5.2,-3.5
 fall = 1
 getpower = 0
 
+[State 0, Jump Cancel]
+type 		= MapAdd
+triggerall	= map(BreakPoints) < 5
+trigger1 		= movehit = 1
+map 			= "BreakPoints"
+value 		    = 1
+ignorehitpause  = 0
+persiswtent     = 0
+
 [State 0, TargetState]
 type = TargetState
 trigger1 = time = 0
@@ -1596,6 +1605,15 @@ guard.hittime 	= 20
 guard.ctrltime 	= 10
 air.fall 		= 1
 getpower 		= 50
+
+[State 0, Jump Cancel]
+type 		= MapAdd
+triggerall	= map(BreakPoints) < 5
+trigger1 		= movehit = 1 && prevstateno != 831
+map 			= "BreakPoints"
+value 		    = 1
+ignorehitpause  = 1
+persistent      = 0
 
 [State 0, VelSet]
 type = VelSet
@@ -2908,16 +2926,6 @@ type = velset
 trigger1 = Time = 0
 x = (gethitvar(xvel)* facing)
 
-[State 5001, 3] ;Stop sliding back
-type = VelMul
-trigger1 = Time >= GetHitVar(Slidetime)
-x = .7
-
-[State 5001, 4]
-type = VelSet
-trigger1 = HitOver
-x = 0
-
 [State 5001, 5]
 type = DefenceMulSet
 trigger1 = HitOver
@@ -3289,7 +3297,7 @@ value = 5100
 [State 1028, Hit ground]
 type = SelfState
 triggerall = vel x < -2 && pos y < -50
-trigger1 = backedgebodydist <= 0 && abs(camerapos x) > 143
+trigger1 = backedgebodydist <= 0 && (abs(camerapos x) > 435 && facing * camerapos x < 0)
 value = 5300
 ignorehitpause = 1
 

@@ -253,7 +253,7 @@ GASH
  ;Insert your stages below.
 
 
-stages/stageZ.def
+stages/stageZ.def, MUSIC=SOUND/GEMANGEL.MP3, MUSIC=SOUND/GLASSDEMON.MP3
 
 ;-------------------------------------------------------------------------------
 [Options]

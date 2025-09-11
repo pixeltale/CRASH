@@ -96,13 +96,12 @@ anim = 180
 velset = 0,0
 
 [Statedef -2]
+
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "camerapos x = %0.1f breakpoints = %f"
-params = camerapos x, map(evacancel)
-
-
+text = "camerapos x = %0.1f facing = %i"
+params = camerapos x, facing
 
 [State 0, Jump Cancel] ;Fireball
 type 		= MapAdd
