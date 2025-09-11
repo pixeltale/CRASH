@@ -106,7 +106,7 @@ params = camerapos x, facing
 [State 0, Jump Cancel] ;Fireball
 type 		= MapAdd
 triggerall	= numhelper(1001)
-triggerall	= helper(1001), movehit = 1 && P2, movetype = H
+triggerall	= helper(1001), movehit = 1 && enemy, movetype = H
 triggerall	= map(BreakPoints) < 5
 trigger1 		= !map(ComboStateCheck)
 map 			= "BreakPoints"

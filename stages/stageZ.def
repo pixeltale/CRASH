@@ -173,13 +173,13 @@ offset = 0, 0
 ; Put a filename for a MOD, MP3 or MIDI here, or just leave it
 ; blank if you don't want music. If an invalid filename is
 ; given, then no music will play.
-bgMusic =
+bgMusic = GEMANGEL.MP3
 
 ; bgmLoopstart = <sample number>
 ; bgmloopend = <sample number>
 
  ;Adjust the volume. 100 is for 100%.
-bgmVolume = 100
+bgmVolume = 50
 
 ; ==========================================================
 

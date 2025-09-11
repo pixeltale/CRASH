@@ -331,7 +331,7 @@ helpertype = Normal ;Player
 name = "Divider"
 ID = 1001
 stateno = 1006
-pos = 75,-20
+pos = 40,-20
 postype = P1    ;P2, Front, Back, Left, Right
 facing = 1
 keyctrl = 0
@@ -423,7 +423,7 @@ time = 10
 
 [State 200, 3]
 type = Changestate
-trigger1 = movecontact || frontedgebodydist < 1 || pos y >= 0
+trigger1 = movecontact || frontedgebodydist < -14 || pos y >= 0
 value = 1007
 ignorehitpause = 1
 
@@ -551,7 +551,7 @@ sprpriority 	= 2
 type = VelMul
 triggerall = 1020
 trigger1 = animelemno(0) = [1, 2] && statetype = A
-x = 0.95
+x = 0.8
 y = 0.8
 [State 0, StateTypeSet]
 type = StateTypeSet
@@ -568,7 +568,7 @@ y = -10
 type = VelSet
 triggerall = 1020
 trigger1 = animelem = 3
-x = 7 + vel x
+x = 7 + 3 * (prevstateno = 100)
 y = -4
 [State 0, VelSet]
 type = VelAdd
@@ -614,7 +614,7 @@ down.hittime 		= 24
 ground.velocity 	= -7+(time*0.25), -5
 guard.ctrltime 	= 12
 guard.slidetime	= 12
-guard.velocity	= 5
+guard.velocity	= -8
 air.velocity 	= -3,-2
 down.velocity	= -2, -3
 fall			= 1
@@ -651,7 +651,7 @@ down.hittime 		= 24
 ground.velocity 	= 5
 guard.ctrltime 	= 12
 guard.slidetime	= 12
-guard.velocity		= -5
+guard.velocity		= 7
 air.velocity 		= 3, 5
 down.velocity		= -2, 5
 fall				= 1

@@ -62,6 +62,7 @@ value = 1
 type = ChangeState
 trigger1 = time = 20
 value = 50
+ctrl = 1
 
 ;---------------------------------------------------------------------------
 ; Air Evade Back
@@ -126,6 +127,7 @@ value = 1
 type = ChangeState
 trigger1 = time = 20
 value = 50
+ctrl = 1
 
 ;---------------------------------------------------------------------------
 ; Ground Evade
@@ -165,6 +167,7 @@ add = 0, 0, 100
 mul = 256,256,256
 invertall = 0
 color = 256
+
 [State 0, NotHitBy]
 type = NotHitBy
 trigger1 = time < 10
@@ -187,7 +190,7 @@ x = 0.6
 
 [State 0, CtrlSet]
 type = CtrlSet
-trigger1 = prevstateno = [200,1030]
+trigger1 = sysvar(1)
 trigger1 = time = 4
 value = 1
 [State 100, 4]
@@ -255,7 +258,7 @@ x = 0.6
 
 [State 0, CtrlSet]
 type = CtrlSet
-trigger1 = prevstateno = [200,1030]
+trigger1 = sysvar(1)
 trigger1 = time = 4
 value = 1
 [State 100, 4]
