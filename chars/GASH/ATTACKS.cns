@@ -48,12 +48,6 @@ getpower 			= 20
 
 [State 0, Jump Cancel]
 type 		= MapSet
-trigger1 		= time = 0
-map 			= "JC"
-value 		= 0
-ignorehitpause 	= 1
-[State 0, Jump Cancel]
-type 		= MapSet
 trigger1 		= movehit
 map 			= "JC"
 value 		= 1
@@ -114,13 +108,6 @@ getpower 		= (100)*(cond(var(var(2)) = 1, 1, 1))
 type = VelSet
 trigger1 = animelemno(0) = [3, 4]
 x = vel x + 5
-
-[State 0, Jump Cancel]
-type 		= MapSet
-trigger1 		= time = 0
-map 		= "JC"
-value 		= 0
-ignorehitpause 	= 1
 
 [State 400, 4]
 type = ChangeState
@@ -208,16 +195,9 @@ ownpal = 0
 
 [State 0, Jump Cancel]
 type 		= MapSet
-trigger1 		= time = 0
-map 		= "JC"
-value 		= 0
-ignorehitpause 	= 1
-
-[State 0, Jump Cancel]
-type 		= MapSet
 trigger1 		= animelemno(-1) >= 4
 map 			= "EVACancel"
-value 		= 1
+value 		= 5
 ignorehitpause 	= 1
 
 [State 200, 3]
@@ -359,15 +339,9 @@ ownpal = 0
 
 [State 0, Jump Cancel]
 type 		= MapSet
-trigger1 		= time = 0
-map 		= "JC"
-value 		= 0
-ignorehitpause 	= 1
-[State 0, Jump Cancel]
-type 		= MapSet
 trigger1 		= animelemno(0) >= 4
 map 			= "EVACancel"
-value 		= 1
+value 		= 5
 ignorehitpause 	= 1
 
 [State 200, 3]
@@ -549,14 +523,6 @@ ID = 11
 postype = P1
 scale = const(size.xscale),const(size.yscale)
 
-
-[State 0, Jump Cancel]
-type 		= MapSet
-trigger1 		= time = 0
-map 			= "JC"
-value 		= 0
-ignorehitpause = 1
-
 [State 0, PlayerPush]
 type = PlayerPush
 trigger1 = movecontact
@@ -590,7 +556,7 @@ y = 0.8
 [State 0, StateTypeSet]
 type = StateTypeSet
 triggerall = 1020
-trigger1 = animelem = 3 || !time && pos y > 0
+trigger1 = animelem = 3 || !time && pos y < 0
 statetype = A       ;S,A,C,L
 movetype = A        ;I,A,H
 physics = N
@@ -716,13 +682,6 @@ trigger1 	= command = "SPECIAL" && anim = 1020 && (animelemno(0) > 5 || movecont
 value	= 1025
 ignorehitpause = 1
 
-[State 0, Jump Cancel]
-type 		= MapSet
-trigger1 		= time = 0
-map 			= "JC"
-value 		= 0
-ignorehitpause = 1
-
 [State 200, 3]
 type = ChangeState
 trigger1 = anim = 1021 && AnimTime = 0
@@ -797,12 +756,6 @@ envshake.phase 	= 1
 getpower 			= 100
 ;++++++++++++++++++++++++++++++++++++++++++++++
 
-[State 0, Jump Cancel]
-type 		= MapSet
-trigger1 		= time = 0
-map 			= "JC"
-value 		= 0
-ignorehitpause = 1
 [State 0, Jump Cancel]
 type 		= MapSet
 trigger1 		= movehit

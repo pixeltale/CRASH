@@ -137,6 +137,11 @@ sprpriority = 1
 velset = 5
 ctrl = 0
 
+[State 0, PlayerPush]
+type = PlayerPush
+trigger1 = 1
+value = 0
+
 [State 0, EVA Cancel]
 type 		= MapAdd
 triggerall	= !TIME
@@ -190,6 +195,11 @@ physics = S
 ctrl = 0
 anim = 61
 sprpriority = 1
+
+[State 0, PlayerPush]
+type = PlayerPush
+trigger1 = 1
+value = 0
 
 [State 0, EVA Cancel]
 type 		= MapAdd

@@ -47,7 +47,7 @@ trigger2 = Map(JC)
 [State -1,JC]
 type = ChangeState
 value = 40
-triggerall = statetype != A 
+triggerall = statetype != A && map(AirActions) < const(AirActionMax)
 triggerall = command = "holdup"
 trigger1 = map(JC)
 trigger2 = ctrl 
