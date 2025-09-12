@@ -3956,15 +3956,8 @@ value = 5120
 
 [State 5111, 11]
 type    = NotHitBy
-triggerall  = !map(FromSKD)
-trigger1    = time >= 14 - enemy, MAP(UntechDecay) - (enemy, Map(ComboTimer) >= 1000) - (enemy, Map(ComboTimer) >= 1200) - (enemy, Map(ComboTimer) >= 1400) - (enemy, Map(ComboTimer) >= 1600)
+trigger1    = time >= 14
 trigger2    = prevstateno = 5228
-value       = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
-time        = 10
-[State 5111, 11]
-type    =  NotHitBy
-triggerall  = map(FromSKD)
-trigger1    = time >= 9 - enemy, map(UntechDecay)
 value       = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
 time        = 10
 
@@ -6161,8 +6154,7 @@ ignorehitpause = 1
 type 		= MapAdd
 triggerall  = map(BreakPoints) < 5
 triggerall	= player(9), map(BreakTimer) >= 450
-trigger1 		= facing * camerapos x > 0 && enemy, map(ComboStateCheck) = 0
-trigger2        = map(ComboStateCheck)
+trigger1 		= facing * camerapos x > 0
 map 			= "BreakPoints"
 value 		    = 1
 ignorehitpause  = 0
@@ -6483,6 +6475,7 @@ persistent = 1
 [State -2, Combo State Check]
 type = MapSet
 trigger1 = enemy, movetype != H
+trigger2 = (enemy, stateno = 5111 && enemy, time >= 14)
 map = "ComboStateCheck"
 value = 0
 ignorehitpause = 1

@@ -100,8 +100,8 @@ velset = 0,0
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "camerapos x = %0.1f p2dist x = %i"
-params = camerapos x, p2dist x
+text = "camerapos x = %0.1f breakpoints = %f"
+params = camerapos x, map(BreakPoints)
 
 [State 0, Jump Cancel] ;Fireball
 type 		= MapAdd
@@ -122,7 +122,7 @@ ignorehitpause = 1
 [State 0, ChangeState]
 type = ChangeState
 triggerall = p2dist x > 250
-triggerall = (abs(camerapos x) < 435 && facing * camerapos x < 0) || BackEdgeBodyDist < -5
+triggerall = (abs(camerapos x) < 435 && facing * camerapos x < 0) || BackEdgeBodyDist <= 0
 trigger1 = stateno != 99
 trigger1 = enemy, stateno = [5300, 5301]
 value = 99

@@ -970,13 +970,15 @@ redirectid = root, id
 
 [State 0, NotHitBy]
 type = NotHitBy
-trigger1 = 1
+trigger1 = movehit
 value = SCA
-time = 1
+time = 10
+redirectid = root, id
 
 [State 0, DestroySelf]
 type = DestroySelf
 trigger1 = !animtime
+trigger2 = root, movetype = H
 ignorehitpause = 1
 
 ;----------------------
@@ -992,7 +994,7 @@ facep2 		= 1
 poweradd 		= 0
 sprpriority 	= 2
 
-[State 0, EVA Cancel]
+[State 0, BREAK Spend]
 type 		= MapAdd
 trigger1 		= !TIME
 map 			= "BreakPoints"
@@ -1126,6 +1128,7 @@ time = 1
 [State 200, 3]
 type = Changestate
 trigger1 = movecontact || frontedgebodydist < -14 || pos y >= 15
+trigger2 = root, movetype = H
 value = 1016
 ignorehitpause = 1
 [State 0, DestroySelf]
@@ -1175,6 +1178,13 @@ anim 		= 2020
 facep2 		= 1
 poweradd 	= 0
 sprpriority 	= 2
+
+[State 0, BREAK Spend]
+type 		= MapAdd
+trigger1 		= !TIME
+map 			= "BreakPoints"
+value 		= -3
+ignorehitpause = 1
 
 [State 0, VelMul]
 type = VelMul
