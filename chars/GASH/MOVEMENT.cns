@@ -8,10 +8,14 @@ sprpriority = 1
 ctrl = 0
 velset = 0, 0
 
+[State 0, VarSet]
+type = VarSet
+trigger1 = !time
+sysvar(1) = prevstateno = [200,1030]
 [State 0, EVA Cancel]
 type 		= MapAdd
 triggerall	= !TIME
-trigger1 		= prevstateno = [200,1030]
+trigger1 		= sysvar(1)
 map 			= "BreakPoints"
 value 		= -1
 ignorehitpause = 1
@@ -42,9 +46,9 @@ x = 5.5
 
 [State - Air Option Limiter - Airdash]
 type = mapadd
-triggerall = prevstateno != [200,1030]
+triggerall = !sysvar(1)
 trigger1 = time = 0
-map = "AirAction"
+map = "AirActions"
 value = 1
 [State - Airdash Momentum Preserve]
 type = mapset
@@ -72,10 +76,14 @@ anim = 61
 sprpriority = 1
 ctrl = 0
 
+[State 0, VarSet]
+type = VarSet
+trigger1 = !time
+sysvar(1) = prevstateno = [200,1030]
 [State 0, EVA Cancel]
 type 		= MapAdd
 triggerall	= !TIME
-trigger1 		= prevstateno = [200,1030]
+trigger1 		= sysvar(1)
 map 			= "BreakPoints"
 value 		= -1
 ignorehitpause = 1
@@ -106,9 +114,9 @@ x = -5.5
 
 [State - Air Option Limiter - Airdash]
 type = mapadd
-triggerall = prevstateno != [200,1030]
+triggerall = !sysvar(1)
 trigger1 = time = 0
-map = "AirAction"
+map = "AirActions"
 value = 1
 [State - Airdash Momentum Preserve]
 type = mapset

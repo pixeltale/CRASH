@@ -1,6 +1,70 @@
-;Dynamiclight - States
+;Ringout Warning and Vorpal Timer
 
 [Statedef -2]
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = (player(1), map(ComboStateCheck) || player(2), map(ComboStateCheck))
+sysvar(1) = 1
+[State 0, VarSet]
+type = VarSet
+trigger1 = (player(1), map(ComboStateCheck) = 0 && player(2), map(ComboStateCheck) = 0)
+sysvar(1) = 0
+
+[State 0, DisplayToClipboard]
+type = DisplayToClipboard
+trigger1 = 1
+text = "p1combo = %f"
+params = player(1), map(ComboStateCheck)
+;ignorehitpause = 
+;persistent = 
+
+
+[State - 1]
+type 		= MapSet
+trigger1 		= roundstate = 1 || map(BreakTimer) >= 450
+map 			= "BreakTimer"
+value 		= 0
+persistent = 1
+[State - 1]
+type 		= MapAdd
+triggerall	= roundstate = 2
+trigger1 		= 1 
+map 			= "BreakTimer"
+value 		= 1 + (sysvar(1) * 2)
+persistent = 1
+
+;Timer Explod
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(1015)
+trigger1 = 1
+anim = F1015
+ID = 1015
+pos = 160, 175
+postype = left
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -1
+supermovetime = 0
+pausemovetime = 0
+scale = 0.35,0.35
+sprpriority = -10
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+
+[State 0, ModifyExplod]
+type = ModifyExplod
+trigger1 = 1
+ID = 1015
+window = -20, 5, 20, -map(BreakTimer)/6
+
 
 [State 0, Explod]
 type = Explod
@@ -43,7 +107,7 @@ removetime = -1
 supermovetime = 0
 pausemovetime = 0
 scale = -0.75,3
-sprpriority = 0
+sprpriority = -10
 ontop = 0
 shadow = 0,0,0
 ownpal = 0

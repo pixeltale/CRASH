@@ -97,7 +97,7 @@ guard.hittime		= 18
 guard.slidetime	= 18
 guard.velocity		= -5
 airguard.velocity 	= 3, -1
-air.velocity 		= p2dist x * 0.2, 1
+air.velocity 		= p2dist x * 0.1, 1
 fall				= 1
 air.fall 			= 0
 forcenofall		= 1
@@ -490,7 +490,7 @@ time = 10
 
 [State 200, 3]
 type = Changestate
-trigger1 = movecontact || frontedgebodydist < -14 || pos y >= 5
+trigger1 = movecontact || frontedgebodydist < -14 || pos y >= 15
 value = 1007
 ignorehitpause = 1
 

@@ -6128,7 +6128,7 @@ ignorehitpause = 1
 ;============================
 ; BreakPoints             ||
 ;============================
-[State 0, Jump Cancel]
+[State 0, Gain On Hit - Standard]
 type 		= MapAdd
 triggerall	= stateno != [800,830]
 triggerall	= map(BreakPoints) < 5
@@ -6136,6 +6136,15 @@ trigger1 		= movehit = 1 && !map(ComboStateCheck)
 map 			= "BreakPoints"
 value 		= 1 + 1 * (map(Counterhit_Flag) > 0)
 ignorehitpause = 1
+[State 0, Gain Via Timer]
+type 		= MapAdd
+triggerall	= player(9), map(BreakTimer) >= 450
+trigger1 		= facing * camerapos x > 0 && enemy, map(ComboStateCheck) = 0
+trigger2        = map(ComboStateCheck)
+map 			= "BreakPoints"
+value 		    = 1
+ignorehitpause  = 0
+persistent      = 0
 
 [State 0, Explod]
 type = Explod
@@ -6443,6 +6452,7 @@ value = 0
 [State -2, Combo State Check]
 type = MapSet
 triggerall = enemy, stateno != [120, 155]
+triggerall = enemy, stateno != [5200,5205]
 trigger1 = enemy, movetype = H
 map = "ComboStateCheck"
 value = 1

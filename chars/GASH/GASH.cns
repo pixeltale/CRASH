@@ -101,7 +101,7 @@ velset = 0,0
 type = DisplayToClipboard
 trigger1 = 1
 text = "camerapos x = %0.1f backedgebodydist = %i"
-params = camerapos x, BackEdgeBodyDist
+params = camerapos x, map(AirAction)
 
 [State 0, Jump Cancel] ;Fireball
 type 		= MapAdd

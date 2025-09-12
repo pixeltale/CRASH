@@ -221,7 +221,10 @@ LoopStart
 Interpolate Blend
 1000,0, 0,0, 70, , AS180D256
 
-; Meter
+; Break Point
 [Begin Action 1010]
 LoopStart
 1000,2, 0,0, 1
+; Timer
+[Begin Action 1015]
+1000,1, 0,-63, 10
