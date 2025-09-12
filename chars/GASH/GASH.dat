@@ -2,6 +2,9 @@
 
 	<#190bd9>UNIQUE MOVES</>
 DOUBLE JAB	-		^A > ^A
+WRIST FLICK =     _F^a
+   <#bbbbbb>An upward attack that restands opponents.</>
+
 
 	<#190bd9>SPECIAL MOVES</>
 DICER	-		^B
@@ -16,12 +19,27 @@ LOITER SHOT	-		_D^B
    <#bbbbbb>A strong launching kick that is invincible
 against airborne attacks. Can be jump canceled.</>
 
+<#190bd9>EXTRA SPECIAL MOVES (3 Break Points)</>
+FLAMAGRA BURNOUT	-		^A + ^B
+   <#bbbbbb>A massive eruption that launches the opponent a good distance.
+   Its long range makes it a strong punish option, but it has no invulnerability.</>
+
+<#190bd9>ULTIMATE (5 Break Points)</>
+<#bbbbbb>Not Implemented Yet.</>
+
 	SYSTEM MECHANICS
 SUPERJUMP	-		_D_U
    <#bbbbbb>Jump higher, faster, and further. Increases your air
    drift.</>   
 EVADE	-		_F^C or _B^C
    <#bbbbbb>An invincible dodge forward or backward. Can be canceled
-into for 2 Break Points.</>   
+into for 1 Break Point.</>
+EXTRA SPECIAL	-		^A+^B
+   <#bbbbbb>A powerful attack that costs 3 Break Points to perform. Can
+   be used to KO the opponent in the corner. Extra Specials, or ES moves 
+   can be selected at character select (not yet implemented).</>
+ULTIMATE	-		^B
+   <#bbbbbb>A powerful attack that costs 5 Break Points to perform. Can
+   be used to KO the opponent from anywhere.</>
    </>
-   </>
+</>

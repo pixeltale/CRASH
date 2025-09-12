@@ -11,10 +11,9 @@ velset = 0, 0
 [State 0, EVA Cancel]
 type 		= MapAdd
 triggerall	= !TIME
-triggerall	= map(BreakPoints) >= 2
 trigger1 		= prevstateno = [200,1030]
 map 			= "BreakPoints"
-value 		= -2
+value 		= -1
 ignorehitpause = 1
 
 [State 0, PalFX]
@@ -76,10 +75,9 @@ ctrl = 0
 [State 0, EVA Cancel]
 type 		= MapAdd
 triggerall	= !TIME
-triggerall	= map(BreakPoints) >= 2
 trigger1 		= prevstateno = [200,1030]
 map 			= "BreakPoints"
-value 		= -2
+value 		= -1
 ignorehitpause = 1
 
 [State 0, PalFX]
@@ -153,10 +151,9 @@ value = 0
 [State 0, EVA Cancel]
 type 		= MapAdd
 triggerall	= !TIME
-triggerall	= map(BreakPoints) >= 2
 trigger1 		= sysvar(1)
 map 			= "BreakPoints"
-value 		= -2
+value 		= -1
 ignorehitpause = 1
 
 [State 0, PalFX]
@@ -191,7 +188,6 @@ x = 0.6
 [State 0, CtrlSet]
 type = CtrlSet
 trigger1 = sysvar(1)
-trigger1 = time = 4
 value = 1
 [State 100, 4]
 type = ChangeState
@@ -222,10 +218,9 @@ value = 0
 [State 0, EVA Cancel]
 type 		= MapAdd
 triggerall	= !TIME
-triggerall	= map(BreakPoints) >= 2
 trigger1 		= sysvar(1)
 map 			= "BreakPoints"
-value 		= -2
+value 		= -1
 ignorehitpause = 1
 
 [State 0, PalFX]
@@ -259,7 +254,6 @@ x = 0.6
 [State 0, CtrlSet]
 type = CtrlSet
 trigger1 = sysvar(1)
-trigger1 = time = 4
 value = 1
 [State 100, 4]
 type = ChangeState
@@ -267,6 +261,52 @@ trigger1 = time = 20
 value = 0
 ctrl = 1
 
+;---------------------------------------------------------------------------
+; PURSUIT (After Launch)
+[Statedef 99]
+type    = S
+physics = S
+sprpriority = 1
+velset = 5
+ctrl = 0
+
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = !time
+x = -100
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = enemy, stateno != [5300, 5301]
+value = 100
+
+[State 0, PosFreeze]
+type = PosFreeze
+trigger1 = enemy, stateno = [5300, 5301]
+value = 1
+
+[State 0, ScreenBound]
+type = ScreenBound
+trigger1 = 1
+value = 0
+movecamera = 0,0
+
+[State 99, 1]
+type = VelAdd
+trigger1 = 1
+x = 2.5
+
+[State 99, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+flag2 = NoAutoTurn
+
+[State 99, 3]
+type 	= ChangeState
+trigger1 		= BackEdgeBodyDist > 0
+value 		= 100
+ctrl 		= 1
 
 ;---------------------------------------------------------------------------
 ; Run F

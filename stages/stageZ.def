@@ -179,7 +179,7 @@ bgMusic = GEMANGEL.MP3
 ; bgmloopend = <sample number>
 
  ;Adjust the volume. 100 is for 100%.
-bgmVolume = 50
+bgmVolume = 20
 
 ; ==========================================================
 

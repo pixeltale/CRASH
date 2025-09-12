@@ -9,16 +9,19 @@ command.buffer.time = 3
 name = "holdfwd";Required (do not remove)
 command = /$F
 time = 1
+buffer.time = 0
 
 [Command]
 name = "holdback";Required (do not remove)
 command = /$B
 time = 1
+buffer.time = 0
 
 [Command]
 name = "up" ;Required (do not remove)
 command = $U
 time = 1
+buffer.time = 0
 [Command]
 name = "holdup" ;Required (do not remove)
 command = /$U
@@ -28,8 +31,31 @@ time = 1
 name = "holddown";Required (do not remove)
 command = /$D
 time = 1
+buffer.time = 0
 
 [Statedef -1]
+
+[State -1, Reset Special Cancel Variable]
+type = VarSet
+trigger1 = 1
+var(1) = 0
+[State -1, Reset ES Cancel Variable]
+type = VarSet
+trigger1 = 1
+var(2) = 0
+
+[State -1, Special Cancel Check]
+type = VarSet
+trigger1 = ctrl || stateno = [60,65]
+trigger2 = stateno = [200,699] && movecontact
+var(1) = 1
+[State -1, ES Cancel Check]
+type = VarSet
+triggerall = map(BreakPoints) >= 3
+trigger1 = var(1)
+trigger2 = stateno = [1000, 1999] && movecontact
+trigger3 = map(Eva_WhiffCancel)
+var(2) = 1
 
 ;===============================================================================
 ;---------------------------------------------------------------------------
@@ -42,7 +68,6 @@ triggerall = statetype != A
 triggerall = command = "28" || command = "27" || command = "29"
 trigger1 = ctrl
 trigger2 = Map(JC)
-
 
 [State -1,JC]
 type = ChangeState
@@ -57,7 +82,7 @@ trigger2 = ctrl
 type = ChangeState
 value = 45
 triggerall = statetype = A && map(AirActions) < const(AirActionMax)
-triggerall = command = "up" && vel y>.1
+triggerall = command = "up"
 trigger1 = ctrl
 
 [State -1,DJC]
@@ -92,6 +117,15 @@ trigger1 = ctrl
 trigger2 = stateno = 250
 
 ;===========================================================================
+;FILAMENT BURNOUT
+[State -1, FUUUUUGA.]
+type = changeState
+value = 2000
+triggerall = command = "SPECIAL" && command = "ATTACK"
+triggerall = statetype != A
+trigger1 = var(2)
+
+;===========================================================================
 ;Air Evade Forward
 [State -1, Airdash]
 type = ChangeState
@@ -100,7 +134,7 @@ triggerall = command != "holdback"
 triggerall = command = "EVADE"
 triggerall = statetype = A
 triggerall = pos y<-30 || vel y > 0
-trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && map(BreakPoints) >= 2
+trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && map(BreakPoints) >= 1
 
 ;Air Evade Back
 [State -1, Airdash]
@@ -110,7 +144,7 @@ triggerall = command = "holdback"
 triggerall = command = "EVADE"
 triggerall = statetype = A
 triggerall = pos y<-30 || vel y > 0
-trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && map(BreakPoints) >= 2
+trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && map(BreakPoints) >= 1
 
 ;Evade Forward
 [State -1, Airdash]
@@ -119,7 +153,7 @@ value = 65
 triggerall = command != "holdback"
 triggerall = command = "EVADE"
 triggerall = statetype != A && stateno != 65
-trigger1 = ctrl || map(EvaCancel) && map(BreakPoints) >= 2
+trigger1 = ctrl || map(EvaCancel) && map(BreakPoints) >= 1
 
 ;Evade Back
 [State -1, Airdash]
@@ -128,7 +162,7 @@ value = 66
 triggerall = command = "holdback"
 triggerall = command = "EVADE"
 triggerall = statetype != A && stateno != 66
-trigger1 = ctrl || map(EvaCancel) && map(BreakPoints) >= 2
+trigger1 = ctrl || map(EvaCancel) && map(BreakPoints) >= 1
 ;===========================================================================
 ;6S: Divider
 [State -1, COP DESTROYER!]
@@ -136,7 +170,7 @@ type = changeState
 value = 1020
 triggerall = command = "SPECIAL" && command = "holdfwd"
 triggerall = statetype != A || pos y < 20
-trigger1 = ctrl || (stateno = 200 || stateno = 400 || stateno = 600) && movecontact || stateno = [60,61]
+trigger1 = var(1)
 
 ;4S: Divider
 [State -1, RAZORWIRE!]
@@ -144,7 +178,7 @@ type = changeState
 value = 1010
 triggerall = command = "SPECIAL" && command = "holdback"
 triggerall = statetype != A
-trigger1 = ctrl || (stateno = [200,220] || stateno = [400,431]) && movecontact
+trigger1 = var(1)
 
 ;2S: Divider
 [State -1, UPPERKICK!]
@@ -152,7 +186,7 @@ type = changeState
 value = 1030
 triggerall = command = "SPECIAL" && command = "holddown"
 triggerall = statetype != A
-trigger1 = ctrl || (stateno = [200,220] || stateno = [400,431]) && movecontact
+trigger1 = var(1)
 
 ;5S: Divider
 [State -1, DICER]
@@ -160,20 +194,28 @@ type = changeState
 value = 1000
 triggerall = command = "SPECIAL"
 triggerall = statetype != A
-trigger1 = ctrl || (stateno = [200,220] || stateno = [400,431]) && movecontact
+trigger1 = var(1)
 ;5S: Divider
 [State -1, DICER ALTERNATIVE]
 type = changeState
 value = 1005
 triggerall = command = "SPECIAL"
 triggerall = statetype = A
-trigger1 = ctrl || (stateno = 600) && movecontact || stateno = [60,61]
+trigger1 = var(1)
 
 
 
 ;===========================================================================
 ;NORMALS
 ;===========================================================================
+;6A - Standing Attack
+[State -1, Standing Attack]
+type = ChangeState
+value = 205
+triggerall = command = "ATTACK" && command = "holdfwd" && command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl || (stateno = 400 || stateno = 200) && movecontact
+
 ;5A - Standing Attack
 [State -1, Standing Attack]
 type = ChangeState
