@@ -275,13 +275,26 @@ ctrl = 1
 type    = S
 physics = S
 sprpriority = 1
-velset = 5
+velset = 5, 0
 ctrl = 0
+
+[State 1030, Full Invulnerability]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+ignorehitpause = 1
+persistent = 1
 
 [State 0, PosAdd]
 type = PosAdd
 trigger1 = !time
 x = -100
+[State 0, PosSet]
+type = PosSet
+trigger1 = 1
+y = 0
+
 
 [State 0, ChangeAnim]
 type = ChangeAnim

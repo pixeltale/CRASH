@@ -23,6 +23,9 @@ against airborne attacks. Can be jump canceled.</>
 FLAMAGRA BURNOUT	-		^A + ^B
    <#bbbbbb>A massive eruption that launches the opponent a good distance.
    Its long range makes it a strong punish option, but it has no invulnerability.</>
+FLYING GUILLOTINE (AIR OK)	-		^A + ^B
+   <#bbbbbb>A powerful version of the DICER projectile. Not as much knockback as Flamagra Burnout,
+   But it has invulnerability and can be used in midair.</>
 
 <#190bd9>ULTIMATE (5 Break Points)</>
 <#bbbbbb>Not Implemented Yet.</>

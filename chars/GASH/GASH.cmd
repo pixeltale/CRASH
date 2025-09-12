@@ -82,7 +82,7 @@ trigger2 = ctrl
 type = ChangeState
 value = 45
 triggerall = statetype = A && map(AirActions) < const(AirActionMax)
-triggerall = command = "up"
+triggerall = command = "up" && map(doubleJump_BUFFFIX) < 2
 trigger1 = ctrl
 
 [State -1,DJC]
@@ -117,12 +117,30 @@ trigger1 = ctrl
 trigger2 = stateno = 250
 
 ;===========================================================================
-;FILAMENT BURNOUT
+;ES1 - FLAMAGRA BURNOUT
 [State -1, FUUUUUGA.]
 type = changeState
 value = 2000
-triggerall = command = "SPECIAL" && command = "ATTACK"
+triggerall = name = "GASH_A"
+triggerall = command = "ES"
 triggerall = statetype != A
+trigger1 = var(2)
+
+;ES2 - FLYING LOTUS
+[State -1, PROJECTILE CUT]
+type = changeState
+value = 2010
+triggerall = name = "GASH_B"
+triggerall = command = "ES"
+triggerall = statetype != A
+trigger1 = var(2)
+;ES2 - FLYING LOTUS
+[State -1, PROJECTILE CUT]
+type = changeState
+value = 2020
+triggerall = name = "GASH_B"
+triggerall = command = "ES"
+triggerall = statetype = A
 trigger1 = var(2)
 
 ;===========================================================================

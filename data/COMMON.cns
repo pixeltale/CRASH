@@ -1735,6 +1735,11 @@ ctrl = 1
 anim = 101
 velset = vel x, 0
 
+[State 0, PosSet]
+type = PosSet
+trigger1 = 1
+y = 0
+
 [State 200, 3]
 type = ChangeState
 trigger1 = animtime = 0
@@ -6098,6 +6103,22 @@ trigger1 = ctrl || movecontact && hitdefattr = A, NA || stateno = [60,61] || (st
 [Statedef -2]
 
 ;===============================================================================
+; ------- Double-Jump Buffer Fix --------
+;===============================================================================
+[State -2, Up Detector]
+type 		= MapSet
+trigger1 		= command != "up" && command != "holdup"
+map 		= "doubleJump_BUFFFIX"
+value 		= 0
+ignorehitpause 	= 1
+[State -2, Up Detector]
+type 		= MapAdd
+trigger1 		= command = "up"
+map 		= "doubleJump_BUFFFIX"
+value 		= 1
+ignorehitpause 	= 1
+
+;===============================================================================
 ; ------- Counter-Hit --------
 ;===============================================================================
 [State -2, CH Check - 1] 				;Checks if the opponent is
@@ -6138,6 +6159,7 @@ value 		= 1 + 1 * (map(Counterhit_Flag) > 0)
 ignorehitpause = 1
 [State 0, Gain Via Timer]
 type 		= MapAdd
+triggerall  = map(BreakPoints) < 5
 triggerall	= player(9), map(BreakTimer) >= 450
 trigger1 		= facing * camerapos x > 0 && enemy, map(ComboStateCheck) = 0
 trigger2        = map(ComboStateCheck)

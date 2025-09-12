@@ -178,6 +178,22 @@ buffer.time = 5
 buffer.hitpause = 1
 buffer.pauseend = 1
 
+
+[Command]
+name = "ES"
+command = a + b
+time = 1
+buffer.time = 5
+buffer.hitpause = 1
+buffer.pauseend = 1
+[Command]
+name = "ES"
+command = y
+time = 1
+buffer.time = 5
+buffer.hitpause = 1
+buffer.pauseend = 1
+
 [Command]
 name = "start"
 command = s
