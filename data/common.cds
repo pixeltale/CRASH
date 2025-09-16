@@ -178,6 +178,13 @@ buffer.time = 5
 buffer.hitpause = 1
 buffer.pauseend = 1
 
+[Command]
+name = "EVADE_NOBUFFER"
+command = c
+time = 1
+buffer.time = 0
+buffer.hitpause = 1
+buffer.pauseend = 1
 
 [Command]
 name = "ES"

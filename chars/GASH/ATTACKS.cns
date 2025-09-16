@@ -442,6 +442,7 @@ air.animtype 	= back
 guardflag 	= MA
 hitflag 		= MAFD
 pausetime 		= 8, 8
+guard.pausetime 	= 4, 4
 sparkno 			= 0
 sparkxy 			= -30, -59
 hitsound 			= 5, 1
@@ -805,7 +806,7 @@ air.animtype 		= back
 guardflag 		= MA
 hitflag 			= MAFD
 ;==============================================
-pausetime 		= 12, 12 
+pausetime 		= 12, 12 + map(CounterHit)
 sparkno 			= 0
 sparkxy 			= -30, -59
 hitsound 			= 5, 1
@@ -866,7 +867,7 @@ sprpriority 	= 2
 type 		= MapAdd
 trigger1 		= !TIME
 map 			= "BreakPoints"
-value 		= -3
+value 		= -2
 ignorehitpause = 1
 
 [State 1030, Full Invulnerability]
@@ -960,6 +961,18 @@ p2stateno 		= 5300
 p2getp1state		= 0
 getpower 			= 0
 
+[State 1220, Afterimage]
+type = AfterImage
+trigger1 = Time = 0
+length = 15
+TimeGap  = 2
+FrameGap = 1
+Trans = Add
+time = 60
+palbright = 1, 1, 1
+paladd = 25,10,10
+palmul = .75,.65,.65
+palcontrast = 220,120,120
 
 [State 0, ScreenBound]
 type = ScreenBound
@@ -998,7 +1011,7 @@ sprpriority 	= 2
 type 		= MapAdd
 trigger1 		= !TIME
 map 			= "BreakPoints"
-value 		= -3
+value 		= -2
 ignorehitpause = 1
 
 [State 1030, Full Invulnerability]

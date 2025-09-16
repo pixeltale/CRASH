@@ -1,0 +1,6 @@
+; BTEXPLOD
+[Begin Action 1016]
+0,0, 1,-46, 10, , , 1.3,2.9
+; Blank
+[Begin Action 0]
+-1,0, 0,0, 0

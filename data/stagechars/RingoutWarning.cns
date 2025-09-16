@@ -2,6 +2,7 @@
 
 [Statedef -2]
 
+
 [State 0, VarSet]
 type = VarSet
 trigger1 = (player(1), map(ComboStateCheck) || player(2), map(ComboStateCheck))
@@ -11,14 +12,20 @@ type = VarSet
 trigger1 = (player(1), map(ComboStateCheck) = 0 && player(2), map(ComboStateCheck) = 0)
 sysvar(1) = 0
 
+[State 0, VarSet]
+type = VarSet
+trigger1 = 1
+sysvar(2) = (player(1), map(ComboTimer) + player(2), map(ComboTimer)) / 2
+[State 0, VarSet]
+type = VarSet
+trigger1 = sysvar(2) > 75
+sysvar(2) = 76
+
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
 text = "p1combo = %f"
 params = player(1), map(ComboStateCheck)
-;ignorehitpause = 
-;persistent = 
-
 
 [State - 1]
 type 		= MapSet
@@ -37,7 +44,7 @@ persistent = 1
 ;Timer Explod
 [State 0, Explod]
 type = Explod
-triggerall = !numexplod(1015)
+triggerall = !numexplod(1015) && !sysvar(2)
 trigger1 = 1
 anim = F1015
 ID = 1015
@@ -71,6 +78,40 @@ trigger1 = sysvar(1)
 ID = 1015
 trans = Alpha
 alpha = 100, 100
+
+;Timer Explod
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(1016) && sysvar(2)
+trigger1 = 1
+anim = 1016
+ID = 1016
+pos = 160, 175
+postype = left
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -1
+supermovetime = 0
+pausemovetime = 0
+scale = 0.35,0.35
+sprpriority = -10
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+[State 0, ModifyExplod]
+type = ModifyExplod
+trigger1 = sysvar(2)
+ID = 1016
+window = -20, 5, 20, -sysvar(2)
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+id = 1016
 
 
 [State 0, Explod]

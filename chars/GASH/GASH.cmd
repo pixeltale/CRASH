@@ -51,7 +51,7 @@ trigger2 = stateno = [200,699] && movecontact
 var(1) = 1
 [State -1, ES Cancel Check]
 type = VarSet
-triggerall = map(BreakPoints) >= 3
+triggerall = map(BreakPoints) >= 2
 trigger1 = var(1)
 trigger2 = stateno = [1000, 1999] && movecontact
 trigger3 = map(Eva_WhiffCancel)
@@ -143,44 +143,7 @@ triggerall = command = "ES"
 triggerall = statetype = A
 trigger1 = var(2)
 
-;===========================================================================
-;Air Evade Forward
-[State -1, Airdash]
-type = ChangeState
-value = 60
-triggerall = command != "holdback"
-triggerall = command = "EVADE"
-triggerall = statetype = A
-triggerall = pos y<-30 || vel y > 0
-trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && map(BreakPoints) >= 1
 
-;Air Evade Back
-[State -1, Airdash]
-type = ChangeState
-value = 61
-triggerall = command = "holdback"
-triggerall = command = "EVADE"
-triggerall = statetype = A
-triggerall = pos y<-30 || vel y > 0
-trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && map(BreakPoints) >= 1
-
-;Evade Forward
-[State -1, Airdash]
-type = ChangeState
-value = 65
-triggerall = command != "holdback"
-triggerall = command = "EVADE"
-triggerall = statetype != A && stateno != 65
-trigger1 = ctrl || map(EvaCancel) && map(BreakPoints) >= 1
-
-;Evade Back
-[State -1, Airdash]
-type = ChangeState
-value = 66
-triggerall = command = "holdback"
-triggerall = command = "EVADE"
-triggerall = statetype != A && stateno != 66
-trigger1 = ctrl || map(EvaCancel) && map(BreakPoints) >= 1
 ;===========================================================================
 ;6S: Divider
 [State -1, COP DESTROYER!]
