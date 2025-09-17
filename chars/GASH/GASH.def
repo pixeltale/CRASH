@@ -3,8 +3,8 @@
 
 ; Player information
 [Info]
-name 		= "GASH_A"        		;Name of character
-displayname 	= "GASH_A"		;Name of character to display
+name 		= "GASH"        		;Name of character
+displayname 	= "GASH"		;Name of character to display
 versiondate 	= 9,9,2025    	;Version date of character (MM-DD-YYYY or X.XX)
 mugenversion 	= 1.0         	;Version of M.U.G.E.N character works on (X.XX)
 ikemenversion	= 0.99

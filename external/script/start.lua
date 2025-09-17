@@ -2771,7 +2771,27 @@ end
 --;===========================================================
 --; SELECT MENU
 --;===========================================================
+-- Load Animation Data
+function start.f_ESAnimGet(ref, group, loop, side)
+	local t = {}
+	for i = 1, 3 do
+		local a = animGetPreloadedData('char', ref, group + i, -1, loop)
+		if a ~= nil then
+			if side == 1 then
+				animSetPos(a, 0, 35)
+			else
+				animSetPos(a, 210, 35)
+				animSetFacing(a, 1)
+			end
+			animUpdate(a)
+			table.insert(t, a)
+		end
+	end
+	return t
+end
+
 function start.f_selectMenu(side, cmd, player, member, selectState)
+	local theSide = side
 	local needUpdateDrawList = false
 	--predefined selection
 	if main.forceChar[side] ~= nil then
@@ -2892,9 +2912,78 @@ function start.f_selectMenu(side, cmd, player, member, selectState)
 				end
 			end
 		--selection menu
-		elseif selectState == 1 then
-			--TODO: hook left for optional menu that shows up after selecting character (groove, palette selection etc.)
+		--Hook left for optional menu that shows up after selecting character (groove, palette selection etc.)
 			--once everything is ready set selectState to 3 to confirm character selection
+			--ES SELECT MENU
+		elseif selectState == 1 then
+			if selES1 == nil then
+				selES1 = 1
+			end
+			if selES2 == nil then
+				selES2 = 1
+			end
+
+			if main.coop or (gamemode() == 'trials') or (side == 1 and (start.p[1].teamMode ~= 0 or main.coop) and P1SelChars > 0) then
+				TypeSelectFlag1 = false
+			else
+				TypeSelectFlag1 = true
+			end
+
+			if main.coop or (gamemode() == 'trials') or (side == 2 and (start.p[2].teamMode ~= 0 or main.coop) and P2SelChars > 0) then
+				TypeSelectFlag2 = false
+			else
+				TypeSelectFlag2 = true
+			end
+			
+			-- Back Out
+			if main.f_input({cmd}, {'s'}) then
+				selectState = 0
+				sndPlay(motif.files.snd_data, start.f_getCursorData(player, '_cursor_move_snd')[1], 3)
+			end
+
+			-- Next Super
+			if main.f_input({cmd}, {'$F'}) and ((side == 1 and TypeSelectFlag1 == true) or (side == 2 and TypeSelectFlag2 == true)) then
+				sndPlay(motif.files.snd_data, start.f_getCursorData(player, '_cursor_move_snd')[1], start.f_getCursorData(player, '_cursor_move_snd')[2])
+				if side == 1 then
+					if selES1 == 1 then
+						selES1 = 2
+					else
+						selES1 = 1
+					end
+				elseif side == 2 then
+					if selES2 == 1 then
+						selES2 = 2
+					else
+						selES2 = 1
+					end
+				end				
+			-- Previous Super
+			elseif main.f_input({cmd}, {'$B'}) and ((side == 1 and TypeSelectFlag1 == true) or (side == 2 and TypeSelectFlag2 == true)) then
+				sndPlay(motif.files.snd_data, start.f_getCursorData(player, '_cursor_move_snd')[1], start.f_getCursorData(player, '_cursor_move_snd')[2])
+				if side == 1 then
+					if selES1 == 1 then
+						start.p[1].t_selTemp[member].t_superAnim_data = start.f_ESAnimGet(start.c[player].selRef, 20000, true, theSide)
+						selES1 = 2
+					else
+						selES1 = 1
+					end
+				elseif side == 2 then
+					if selES2 == 1 then
+						start.p[2].t_selTemp[member].t_superAnim_data = start.f_ESAnimGet(start.c[player].selRef, 20000, true, theSide)
+						selES2 = 2
+					else
+						selES2 = 1
+					end
+				end
+			
+				-- Confirm Super --BOOKMARK
+			elseif (not main.coop) and (main.f_input({cmd}, {'x'}) or main.f_input({cmd}, {'y'}) or main.f_input({cmd}, {'z'}) or main.f_input({cmd}, {'a'}) or main.f_input({cmd}, {'b'}) or main.f_input({cmd}, {'c'})) or (ArcadeEdition == 1 and timerSelect == -1) then
+				sndPlay(motif.files.snd_data, start.f_getCursorData(player, '_cursor_done_snd')[1], start.f_getCursorData(player, '_cursor_done_snd')[2])
+				selectState = 2
+			end
+
+		-- Super Delay Confirm -- Essentially just passed for now
+		elseif selectState == 2 then
 			selectState = 3
 		--confirm selection
 		elseif selectState == 3 then

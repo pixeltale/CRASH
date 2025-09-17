@@ -5933,7 +5933,7 @@ value = -1
 type = NotHitBy
 trigger1 = (stateno = [120,155]) && !map(PBCheck)
 value = ,NT,ST,HT
-time = 2
+time = 1
 ignorehitpause = 1
 
 ;==========================
@@ -5974,6 +5974,7 @@ ignorehitpause = 1
 [State -2, Combo State Check]
 type = MapAdd
 trigger1 = map(ComboStateCheck)
+trigger1 = stateno != 803
 map = "ComboTimer"
 value = 1
 ignorehitpause = 1

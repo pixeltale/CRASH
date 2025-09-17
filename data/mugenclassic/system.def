@@ -1,4 +1,4 @@
-﻿; Definitions of system screens
+; Definitions of system screens
 
 ;----------------------------
 [Info]
@@ -23,8 +23,8 @@ localcoord = 320,240      ;Local coordinate space width and height (new in MUGEN
 [Files]
 spr = system.sff                    ;Filename of sprite data
 snd = system.snd                    ;Filename of sound data
-logo.storyboard = ../kfm/logo.def   ;Logo storyboard definition (optional)
-intro.storyboard = ../kfm/intro.def ;Intro storyboard definition (optional)
+;;logo.storyboard = ../kfm/logo.def 		Logo storyboard definition (optional)
+;;intro.storyboard = ../kfm/intro.def 		Intro storyboard definition (optional)
 select = select.def                 ;Character and stage selection list
 fight = fight.def                   ;Fight definition filename
 font1 = f-4x6.def                   ;System fonts
@@ -610,6 +610,16 @@ type  = anim
 actionno = 200
 layerno = 1 ; Front
 start = 0,95
+
+; ES Selection 1
+[Begin Action 195]
+LoopStart
+195,0, 0,0, 1
+
+; ES Selection 2
+[Begin Action 196]
+LoopStart
+195,1, 0,-4, 1
 
 [Begin Action 200]
 200,4, 0,0, 1

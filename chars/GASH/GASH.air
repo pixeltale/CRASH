@@ -1193,3 +1193,12 @@ Clsn2Default: 4
 LoopStart
 40,5, 10,20, 3
 
+; ES1 Icon
+[Begin Action 20000]
+LoopStart
+20000,0, 0,0, 10, , , 1,1, 2
+; ES2 Icon
+[Begin Action 20001]
+LoopStart
+20000,1, 0,0, 10, , , 1,1, 2
+

@@ -900,10 +900,13 @@ facing = 1
 keyctrl = 0
 ownpal = 0
 
-[State 0, AssertSpecial]
-type = AssertSpecial
-trigger1 = helper(2010), HitPauseTime
-flag = AnimFreeze
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = helper(2010), movehit
+value = anim
+elem = animelemno(0)
+ignorehitpause = 1
+
 
 [State 200, 3]
 type = ChangeState
@@ -961,18 +964,31 @@ p2stateno 		= 5300
 p2getp1state		= 0
 getpower 			= 0
 
-[State 1220, Afterimage]
-type = AfterImage
-trigger1 = Time = 0
-length = 15
-TimeGap  = 2
-FrameGap = 1
-Trans = Add
-time = 60
-palbright = 1, 1, 1
-paladd = 25,10,10
-palmul = .75,.65,.65
-palcontrast = 220,120,120
+[State 0, Custom Afterimage]
+type = Explod
+trigger1 = time%5=0
+anim = anim
+animelem = animelemno(0)
+animfreeze = 1
+ID = 1000
+postype = none
+pos = pos x+camerapos x,pos y
+facing = root, facing
+vfacing = 1
+bindtime = 1
+supermovetime = 0
+pausemovetime = 0
+scale = root, const(size.xscale),root, const(size.yscale)
+sprpriority = 10
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+trans = add
+removetime = 40
+palfx.time = 40
+palfx.sinmul = -255,-255,-255,160
+removeongethit = 0
+ignorehitpause = 1
 
 [State 0, ScreenBound]
 type = ScreenBound
@@ -1013,6 +1029,7 @@ trigger1 		= !TIME
 map 			= "BreakPoints"
 value 		= -2
 ignorehitpause = 1
+persistent	= 0
 
 [State 1030, Full Invulnerability]
 type = NotHitBy
@@ -1124,6 +1141,31 @@ p2stateno 		= 5300
 p2getp1state		= 0
 getpower 			= 0
 
+[State 0, Custom Afterimage]
+type = Explod
+trigger1 = time%2=0
+anim = anim
+animelem = animelemno(0)
+animfreeze = 1
+ID = 1000
+postype = none
+pos = pos x+camerapos x,pos y
+facing = root, facing
+vfacing = 1
+bindtime = 1
+supermovetime = 0
+pausemovetime = 0
+scale = root, const(size.xscale),root, const(size.yscale)
+sprpriority = 10
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+trans = add
+removetime = 40
+palfx.time = 40
+palfx.sinmul = -255,-255,-255,160
+removeongethit = 0
+ignorehitpause = 1
 
 [State 0, ScreenBound]
 type = ScreenBound
@@ -1192,11 +1234,17 @@ facep2 		= 1
 poweradd 	= 0
 sprpriority 	= 2
 
+[State 0, EVAEnd]
+type 		= MapSet
+trigger1 		= !TIME
+map 			= "EvaCancel"
+value 		= 0
+ignorehitpause = 1
 [State 0, BREAK Spend]
 type 		= MapAdd
 trigger1 		= !TIME
 map 			= "BreakPoints"
-value 		= -3
+value 		= -2
 ignorehitpause = 1
 
 [State 0, VelMul]

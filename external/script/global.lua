@@ -262,6 +262,18 @@ function loop()
 	start.f_stageMusic()
 	--match start
 	if roundstart() then
+		if selES1 == nil then
+			selES1 = 1
+		end
+		if selES2 == nil then
+			selES2 = 1
+		end
+
+		charMapSet(1, "ES_SELECT", selES1)
+		charMapSet(2, "ES_SELECT", selES2)
+
+		
+		
 		setLifebarElements({bars = main.lifebar.bars})
 		if roundno() == 1 then
 			speedMul = 1

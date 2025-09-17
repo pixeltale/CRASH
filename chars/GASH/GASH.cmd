@@ -121,7 +121,7 @@ trigger2 = stateno = 250
 [State -1, FUUUUUGA.]
 type = changeState
 value = 2000
-triggerall = name = "GASH_A"
+triggerall = map(ES_SELECT) = 1
 triggerall = command = "ES"
 triggerall = statetype != A
 trigger1 = var(2)
@@ -130,7 +130,7 @@ trigger1 = var(2)
 [State -1, PROJECTILE CUT]
 type = changeState
 value = 2010
-triggerall = name = "GASH_B"
+triggerall = map(ES_SELECT) = 2
 triggerall = command = "ES"
 triggerall = statetype != A
 trigger1 = var(2)
@@ -138,7 +138,7 @@ trigger1 = var(2)
 [State -1, PROJECTILE CUT]
 type = changeState
 value = 2020
-triggerall = name = "GASH_B"
+triggerall = map(ES_SELECT) = 2
 triggerall = command = "ES"
 triggerall = statetype = A
 trigger1 = var(2)
