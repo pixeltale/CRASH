@@ -122,9 +122,15 @@ ignorehitpause = 1
 [State 0, ChangeState]
 type = ChangeState
 triggerall = p2dist x > 250
-triggerall = (abs(camerapos x) < 435 && facing * camerapos x < 0) || BackEdgeBodyDist <= 0
+triggerall = (abs(camerapos x) < 435 && facing * camerapos x < 20) || BackEdgeBodyDist <= 0
 trigger1 = stateno != 99
 trigger1 = enemy, stateno = [5300, 5301]
 value = 99
 ctrl = 0
 ignorehitpause = 1
+
+[State 0, ScreenBound]
+type = ScreenBound
+trigger1 = enemy, stateno = [5300, 5301]
+value = 0
+movecamera = 0,0

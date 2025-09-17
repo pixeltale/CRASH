@@ -43,6 +43,10 @@ var(1) = 0
 type = VarSet
 trigger1 = 1
 var(2) = 0
+[State -1, Reset ES Cancel Variable]
+type = VarSet
+trigger1 = 1
+var(3) = 0
 
 [State -1, Special Cancel Check]
 type = VarSet
@@ -56,6 +60,11 @@ trigger1 = var(1)
 trigger2 = stateno = [1000, 1999] && movecontact
 trigger3 = map(Eva_WhiffCancel)
 var(2) = 1
+[State -1, ULTIMATE Cancel Check]
+type = VarSet
+triggerall = map(BreakPoints) >= 3
+trigger1 = var(2)
+var(3) = 1
 
 ;===============================================================================
 ;---------------------------------------------------------------------------
@@ -68,7 +77,6 @@ triggerall = statetype != A
 triggerall = command = "28" || command = "27" || command = "29"
 trigger1 = ctrl
 trigger2 = Map(JC)
-
 [State -1,JC]
 type = ChangeState
 value = 40
@@ -84,7 +92,6 @@ value = 45
 triggerall = statetype = A && map(AirActions) < const(AirActionMax)
 triggerall = command = "up" && map(doubleJump_BUFFFIX) < 2
 trigger1 = ctrl
-
 [State -1,DJC]
 type = ChangeState
 value = 45
@@ -101,8 +108,8 @@ type = ChangeState
 value = 100
 triggerall = command != "holdback"
 triggerall = command = "66"
-triggerall = stateno!=100
-trigger1 = statetype = S
+triggerall = stateno !=100
+triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = stateno = 250
 
@@ -116,6 +123,15 @@ trigger1 = statetype = S
 trigger1 = ctrl
 trigger2 = stateno = 250
 
+
+;===========================================================================
+;ULTIMATE - HEIAN ERA HATECRIMES
+[State -1, FUUUUUGA.]
+type 	= changeState
+value 	= 3000
+triggerall 	= command = "ULTIMATE"
+triggerall 	= statetype != A && stateno != 3000
+trigger1 		= var(2)
 ;===========================================================================
 ;ES1 - FLAMAGRA BURNOUT
 [State -1, FUUUUUGA.]
@@ -123,7 +139,7 @@ type = changeState
 value = 2000
 triggerall = map(ES_SELECT) = 1
 triggerall = command = "ES"
-triggerall = statetype != A
+triggerall = statetype != A && stateno != 2000
 trigger1 = var(2)
 
 ;ES2 - FLYING LOTUS
@@ -132,7 +148,7 @@ type = changeState
 value = 2010
 triggerall = map(ES_SELECT) = 2
 triggerall = command = "ES"
-triggerall = statetype != A
+triggerall = statetype != A && stateno != 2010
 trigger1 = var(2)
 ;ES2 - FLYING LOTUS
 [State -1, PROJECTILE CUT]
@@ -140,7 +156,7 @@ type = changeState
 value = 2020
 triggerall = map(ES_SELECT) = 2
 triggerall = command = "ES"
-triggerall = statetype = A
+triggerall = statetype = A && stateno != 2020
 trigger1 = var(2)
 
 

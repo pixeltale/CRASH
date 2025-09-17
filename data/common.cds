@@ -68,11 +68,11 @@ buffer.pauseend = 1
 
 [Command]
 name = "holddown"
-command =
+command = /$D
 time = 1
 buffer.time = 1
 buffer.hitpause = 1
-buffer.pauseend = 1
+buffer.pauseend = 0
 
 ; Every common command below this point is deprecated.
 ; It is recommended that a character that doesn't need commands for itself but still wishes to use the command trigger should still define the necessary commands in its own command file.
@@ -183,6 +183,14 @@ name = "EVADE_NOBUFFER"
 command = c
 time = 1
 buffer.time = 0
+buffer.hitpause = 1
+buffer.pauseend = 1
+
+[Command]
+name = "ULTIMATE"
+command = z
+time = 1
+buffer.time = 5
 buffer.hitpause = 1
 buffer.pauseend = 1
 

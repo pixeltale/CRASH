@@ -31,12 +31,6 @@ type = S
 physics = S
 sprpriority = 0
 
-[State Cancel]
-type = mapset
-trigger1 = 1
-map = "GC"
-value = 0
-
 [State 0, 1]
 type = ChangeAnim
 trigger1 = Anim != 0 && Anim != 5
@@ -5800,7 +5794,7 @@ ID = 1011
 ;============================
 [State 0, Jump Cancel]
 type 		= MapSet
-trigger1 		= movecontact || map(Eva_WhiffCancel)
+trigger1 		= movecontact && stateno < 2000|| map(Eva_WhiffCancel)
 map 			= "EVACancel"
 value 		= 1
 ignorehitpause 	= 1
