@@ -62,7 +62,7 @@ trigger3 = map(Eva_WhiffCancel)
 var(2) = 1
 [State -1, ULTIMATE Cancel Check]
 type = VarSet
-triggerall = map(BreakPoints) >= 3
+triggerall = map(BreakPoints) >= 4
 trigger1 = var(2)
 var(3) = 1
 
@@ -131,7 +131,7 @@ type 	= changeState
 value 	= 3000
 triggerall 	= command = "ULTIMATE"
 triggerall 	= statetype != A && stateno != 3000
-trigger1 		= var(2)
+trigger1 		= var(3)
 ;===========================================================================
 ;ES1 - FLAMAGRA BURNOUT
 [State -1, FUUUUUGA.]

@@ -950,7 +950,7 @@ guard.ctrltime 	= 25
 guard.slidetime	= 25
 airguard.velocity 	= -5,-5
 ground.velocity 	= -8, -8
-air.velocity 		= -7,-6
+air.velocity 		= -8,-6
 envshake.time 		= 0
 fall 			= 1
 air.fall 			= 1
@@ -1300,15 +1300,6 @@ facep2 		= 1
 poweradd 		= 0
 sprpriority 	= 2
 
-[State 1030, Full Invulnerability]
-type = NotHitBy
-trigger1 = !time
-value = SCA
-time = 20
-ignorehitpause = 1
-persistent = 1
-
-
 [State 0, EVAEnd]
 type 		= MapSet
 trigger1 		= 1
@@ -1319,7 +1310,7 @@ ignorehitpause = 1
 type 		= MapAdd
 trigger1 		= !TIME
 map 			= "BreakPoints"
-value 		= -3
+value 		= -4
 ignorehitpause = 1
 
 [State 0, SuperPause]
@@ -1410,6 +1401,12 @@ time = 40
 movetime = 22
 darken = 1
 unhittable = 1
+[State 0, MapSet]
+type = MapSet
+trigger1 = animelem = 2
+map = "DARKTIME"
+value = 100
+ignorehitpause = 1
 
 [State 0, Explod]
 type = Explod
@@ -1499,7 +1496,7 @@ guard.ctrltime 	= 5
 guard.slidetime	= 25
 airguard.velocity 	= -8,-5
 ground.velocity 	= -8, -8
-air.velocity 		= -10, -8
+air.velocity 		= -10, -7
 envshake.time 		= 0
 fall 			= 1
 air.fall 			= 1

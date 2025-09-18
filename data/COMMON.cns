@@ -966,7 +966,7 @@ p2facing 	= 1
 trigger1	= prevstateno = 831
 trigger1 	= !movecontact && !movereversed
 hitonce 	= 1
-attr 	    = A, NA
+attr 	    = A, NT
 damage 	    = 0
 hitflag 	= AF
 guardflag 	= HA
@@ -5555,6 +5555,24 @@ trigger1 = ctrl || movecontact && hitdefattr = A, NA || stateno = [60,61] || (st
 [Statedef -2]
 
 ;===============================================================================
+; ------- Universal Screen Darkening - Visual Effects --------
+;===============================================================================
+[State 0, MapAdd]
+type = MapADD
+trigger1 = MAP(DARKTIME)
+map = "DARKTIME"
+value = -1
+ignorehitpause = 1
+
+[State 0, BGPalFX]
+type = BGPalFX
+trigger1 = map(DARKTIME)
+time = 5
+add = -(map(DARKTIME)) * 1.1,-(map(DARKTIME)) * 1.1,-(map(DARKTIME)) * 1.1
+persistent = 1
+ignorehitpause = 1
+
+;===============================================================================
 ; ------- Eva Cancel - Visual Effects --------
 ;===============================================================================
 [State 0, MapSet]
@@ -5629,7 +5647,7 @@ ignorehitpause = 1
 [State 0, Gain On Hit - Standard]
 type 		= MapAdd
 triggerall	= map(BreakPoints) < 5
-triggerall	    = stateno != [800,830]
+triggerall	    = stateno != [800,830] && stateno < 2000
 trigger1 		= movehit = 1 && !map(ComboStateCheck)
 trigger2        = map(ComboTimer) = 152
 map 			= "BreakPoints"
@@ -5968,7 +5986,8 @@ ignorehitpause = 1
 [State -2, Combo State Check]
 type = MapAdd
 trigger1 = map(ComboStateCheck)
-trigger1 = stateno != 803
+trigger1 = stateno != 803 && stateno < 2000
+trigger1 = enemy, stateno != [5300, 5301]
 map = "ComboTimer"
 value = 1
 ignorehitpause = 1
