@@ -1302,11 +1302,9 @@ sprpriority 	= 2
 
 [State 1030, Full Invulnerability]
 type = NotHitBy
-triggerall=enemy,statetype=A
-triggerall=enemy,movetype=A
 trigger1 = !time
 value = SCA
-time =  5
+time = 20
 ignorehitpause = 1
 persistent = 1
 
