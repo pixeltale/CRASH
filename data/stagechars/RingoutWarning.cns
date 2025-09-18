@@ -38,7 +38,7 @@ type 		= MapAdd
 triggerall	= roundstate = 2
 trigger1 		= 1 
 map 			= "BreakTimer"
-value 		= 2 - (sysvar(1) * 2)
+value 		= 1 - (sysvar(1))
 persistent = 1
 
 ;Timer Explod
@@ -98,7 +98,7 @@ removetime = -1
 supermovetime = 0
 pausemovetime = 0
 scale = 0.35,0.35
-sprpriority = -10
+sprpriority = -9
 ontop = 0
 shadow = 0,0,0
 ownpal = 0
@@ -132,7 +132,7 @@ removetime = -1
 supermovetime = 0
 pausemovetime = 0
 scale = 0.75,3
-sprpriority = 0
+sprpriority = -100
 ontop = 0
 shadow = 0,0,0
 ownpal = 0
@@ -155,7 +155,7 @@ removetime = -1
 supermovetime = 0
 pausemovetime = 0
 scale = -0.75,3
-sprpriority = -10
+sprpriority = -100
 ontop = 0
 shadow = 0,0,0
 ownpal = 0

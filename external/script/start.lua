@@ -2962,14 +2962,12 @@ function start.f_selectMenu(side, cmd, player, member, selectState)
 				sndPlay(motif.files.snd_data, start.f_getCursorData(player, '_cursor_move_snd')[1], start.f_getCursorData(player, '_cursor_move_snd')[2])
 				if side == 1 then
 					if selES1 == 1 then
-						start.p[1].t_selTemp[member].t_superAnim_data = start.f_ESAnimGet(start.c[player].selRef, 20000, true, theSide)
 						selES1 = 2
 					else
 						selES1 = 1
 					end
 				elseif side == 2 then
 					if selES2 == 1 then
-						start.p[2].t_selTemp[member].t_superAnim_data = start.f_ESAnimGet(start.c[player].selRef, 20000, true, theSide)
 						selES2 = 2
 					else
 						selES2 = 1
