@@ -161,6 +161,13 @@ time = 1
 buffer.time = 5
 buffer.hitpause = 1
 buffer.pauseend = 1
+[Command]
+name = "HOLD_SPECIAL"
+command = /b
+time = 1
+buffer.time = 0
+buffer.hitpause = 1
+buffer.pauseend = 1
 
 [Command]
 name = "c"

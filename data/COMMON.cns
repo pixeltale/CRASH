@@ -2694,7 +2694,7 @@ y = cond((enemy, map(ComboTimer) < 1000), gethitvar(yvel), gethitvar(yvel) * (10
 
 [State 5030, 5]
 type = ChangeState
-triggerall = alive && BackEdgeBodyDist > 0
+triggerall = alive
 triggerall = HitFall
 trigger1 = HitOver
 trigger2 = Vel Y > 0    ;Hit ground
@@ -2703,7 +2703,7 @@ value = 5050 ;HITA_FALL
 
 [State 5030, 5]
 type = ChangeState
-triggerall = alive && BackEdgeBodyDist > 0
+triggerall = alive
 triggerall = !HitFall
 trigger1 = HitOver
 trigger2 = Vel Y > 0    ;Hit ground
@@ -5243,14 +5243,14 @@ y = .25
 [State 5050, 5]; Recover in mid air
 type = ChangeState
 triggerall = alive
-triggerall = gethitvar(hittime) = -1
+triggerall = gethitvar(hittime) = 0
 trigger1 = 1 ;Condition that makes you always airtech on the first possible frame
 value = 5210 
 
 [State 1028, Hit ground]
 type = SelfState
 trigger1 = Time > 10
-trigger1 = vel y + pos y >= 0
+trigger1 = pos y >= 0
 value = 5100
 
 ;---------------------------------------------------------------------------
