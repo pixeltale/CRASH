@@ -18,6 +18,11 @@ time = 1
 buffer.time = 0
 
 [Command]
+name = "HOLD_UP" ;Required (do not remove)
+command = /$U
+time = 1
+buffer.time = 0
+[Command]
 name = "up" ;Required (do not remove)
 command = $U
 time = 1
@@ -87,18 +92,18 @@ trigger2 = ctrl
 
 ;Double Jump Raw
 [State -1,DJC]
-type = ChangeState
-value = 45
+type 	= ChangeState
+value 	= 1040
 triggerall = statetype = A && map(AirActions) < const(AirActionMax)
-triggerall = command = "up" && map(doubleJump_BUFFFIX) < 2
+triggerall = command = "up" && map(doubleJump_BUFFFIX) < 2 && map(Float) < 1
 trigger1 = ctrl
 [State -1,DJC]
-type = ChangeState
-value = 45
-triggerall = movecontact && command = "holdup"
+type 	= ChangeState
+value 	= 1040
+triggerall = movecontact && command = "holdup" && map(Float) < 1
 triggerall = statetype = A && map(AirActions) < const(AirActionMax)
-trigger1 = ctrl && stateno!= [40,55] && !(stateno = 56 && time < 20)
-trigger2 = movecontact && hitdefattr = A, NA
+trigger1 = ctrl && stateno != 1040 
+trigger2 = movecontact && hitdefattr = A, NA, SA
 trigger3 =  stateno=45 || stateno=46|| stateno=50
 trigger3 = vel y>.1
 
@@ -119,7 +124,7 @@ type = ChangeState
 value = 105
 triggerall = command = "44"
 triggerall = stateno!=105
-trigger1 = statetype = S
+triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = stateno = 250
 
@@ -160,13 +165,6 @@ value = 1035
 triggerall = command = "SPECIAL" && command = "holddown"
 triggerall = statetype = A
 trigger1 = var(1)
-;j5S: Float
-[State -1, Hunter Dievermillion]
-type = changeState
-value = 1040
-triggerall = command = "SPECIAL"
-triggerall = statetype = A && stateno != 1040 && map(Float) < 2
-trigger1 = var(1) || stateno = 1035 && MoveContact
 
 ;6S: Hunter Dievermillion
 [State -1, COP DESTROYER!]

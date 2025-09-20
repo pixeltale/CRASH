@@ -112,7 +112,7 @@ params = camerapos x, map(nibble)
 
 [State 0, nibble] ;NIBBLE
 type 		= MapAdd
-trigger1 		= roundstate = 0
+trigger1 		= roundstate != 2
 map 			= "NIBBLE"
 value 		= 0
 ignorehitpause = 1
