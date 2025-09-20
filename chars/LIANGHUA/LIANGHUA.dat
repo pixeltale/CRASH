@@ -1,35 +1,51 @@
 	<#bbbbbb>This move list assumes you are facing to the right.</>
-
+   <#190bd9>UNIQUE TRAIT: NARCOLEPSY</>
+   <#bbbbbb>Lianghua is sleep deprived, and begins each round
+   in a slow, beleagured state. Landing her 4S, <<MIDNIGHT SNACK>>
+   Will cause her to wake up gradually, empowering her attacks up
+   to three times.</>
 	<#190bd9>UNIQUE MOVES</>
 DOUBLE JAB	-		^A > ^A
-WRIST FLICK -     _F^a
-   <#bbbbbb>An upward attack that restands opponents.</>
+VICIOUS GARB -     _F^A
+   <#bbbbbb>An upward attack that restands opponents.
+   Invulnerable to airborne attacks and has upper body
+   invulnerability.</>
+PARING NAIL -     _B^A
+   <#bbbbbb>A downward claw strike with lots of range.</>
 
 
 	<#190bd9>SPECIAL MOVES</>
-DICER	-		^B
+...OUT OF HELL	-		^B
    <#bbbbbb>A simple projectile attack.</>
-COP KILLER	-		_F^B
-   <#bbbbbb>A flying knee with a followup that knocks down.</>
-_!FOR FUN!	-		^B
-RAZORWIRE	-		_B^B
-   <#bbbbbb>Gash pulls in the opponent with a plus on block,
-side-switching attack that forces a restand on hit.</>
-LOITER SHOT	-		_D^B 
-   <#bbbbbb>A strong launching kick that is invincible
-against airborne attacks. Can be jump canceled.</>
+SANGUINE GLIDE	-		_F^B
+   <#bbbbbb>An advancing forward dash with an attack followup.
+   becomes faster the more she awakens.</>
+_!BLOODLETTING	-		^A
+<#bbbbbb>A low-hitting slash.</>
+_!BRAKING	-		^B
+MIDNIGHT SNACK	-		_B^B
+   <#bbbbbb>A short range command grab. Drinking the enemy's 
+   blood will wake Lianghua up a bit.</>
+BLEEDING CRESCENT (AIR OK!)	-		_D^B 
+   <#bbbbbb>A fast kick that must be guarded standing.
+   Ground bounces the opponent on hit.</>
+HUNTER, KILLER (AIR ONLY, HOLD OK!)	-		^B 
+   <#bbbbbb>A float maneuver. After releasing the button,
+   Lianghua will lunge in the direction held.</>
 
 <#190bd9>EXTRA SPECIAL MOVES (3 Break Points)</>
-FLAMAGRA BURNOUT	-		^A + ^B
-   <#bbbbbb>A massive eruption that launches the opponent a good distance.
-   Its long range makes it a strong punish option, but it has no invulnerability.</>
-FLYING GUILLOTINE (AIR OK)	-		^A + ^B
-   <#bbbbbb>A powerful version of the DICER projectile. Not as much knockback as Flamagra Burnout,
-   But it has invulnerability and can be used in midair.</>
+EXPLODE	-		^A + ^B
+   <#bbbbbb>A massive eruption that launches
+   the opponent a good distance.</>
+DARK ANGEL	-		^A + ^B
+   <#bbbbbb>A multihitting projectile that can be used
+   to trap the opponent in place.</>
 
 <#190bd9>ULTIMATE (5 Break Points)</>
-ALL-SLAUGHTER -		^Z
-   <#bbbbbb>Gash kicks the opponent into the air before following up with a powerful launching attack.</>
+THOSE WHO BLEED -		^Z
+   <#bbbbbb>Lianghua strikes the opponent with BLEEDING
+   CRESCENT before performing a powerful multi-hit slash
+   with lots of knockback.</>
 
 	SYSTEM MECHANICS
 SUPERJUMP	-		_D_U

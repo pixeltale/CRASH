@@ -150,24 +150,23 @@ triggerall = map(ES_SELECT) = 2
 triggerall = command = "ES"
 triggerall = statetype != A && stateno != 2010
 trigger1 = var(2)
-;ES2 - FLYING LOTUS
-[State -1, PROJECTILE CUT]
-type = changeState
-value = 2020
-triggerall = map(ES_SELECT) = 2
-triggerall = command = "ES"
-triggerall = statetype = A && stateno != 2020
-trigger1 = var(2)
 
 
 ;===========================================================================
+;2S: Overheel
+[State -1, OVERKICK!]
+type = changeState
+value = 1035
+triggerall = command = "SPECIAL" && command = "holddown"
+triggerall = statetype = A
+trigger1 = var(1)
 ;j5S: Float
 [State -1, Hunter Dievermillion]
 type = changeState
 value = 1040
 triggerall = command = "SPECIAL"
 triggerall = statetype = A && stateno != 1040 && map(Float) < 2
-trigger1 = var(1)
+trigger1 = var(1) || stateno = 1035 && MoveContact
 
 ;6S: Hunter Dievermillion
 [State -1, COP DESTROYER!]
@@ -186,7 +185,7 @@ triggerall = statetype != A
 trigger1 = var(1)
 
 ;2S: Overheel
-[State -1, UPPERKICK!]
+[State -1, OVERKICK!]
 type = changeState
 value = 1030
 triggerall = command = "SPECIAL" && command = "holddown"

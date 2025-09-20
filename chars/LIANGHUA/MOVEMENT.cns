@@ -11,7 +11,7 @@ velset = 0, 0
 [State 0, VarSet]
 type = VarSet
 trigger1 = !time
-sysvar(1) = prevstateno = [200,1030]
+sysvar(1) = prevstateno = [200,1035]
 [State 0, EVA Cancel]
 type 		= MapAdd
 triggerall	= !TIME
@@ -79,7 +79,7 @@ ctrl = 0
 [State 0, VarSet]
 type = VarSet
 trigger1 = !time
-sysvar(1) = prevstateno = [200,1030]
+sysvar(1) = prevstateno = [200,1035]
 [State 0, EVA Cancel]
 type 		= MapAdd
 triggerall	= !TIME

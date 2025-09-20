@@ -1184,7 +1184,7 @@ time = 1
 type = Changestate
 trigger1 = movecontact || frontedgebodydist < -14 || pos y >= 15
 trigger2 = root, movetype = H
-value = 1016
+value = 2016
 ignorehitpause = 1
 [State 0, DestroySelf]
 type = DestroySelf

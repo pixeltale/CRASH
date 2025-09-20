@@ -5524,7 +5524,7 @@ value = 65
 triggerall = command != "holdback"
 triggerall = stateno != 66 && command = "EVADE" || stateno = 66 && command = "EVADE_NOBUFFER"
 triggerall = statetype != A && stateno != 65
-trigger1 = ctrl || map(EvaCancel) && map(BreakPoints) >= 1
+trigger1 = ctrl || map(EvaCancel) > 0 && map(BreakPoints) >= 1
 
 ;Evade Back
 [State -1, Airdash]
@@ -5533,7 +5533,7 @@ value = 66
 triggerall = command = "holdback"
 triggerall = command = "EVADE"
 triggerall = statetype != A && stateno != 66
-trigger1 = ctrl || map(EvaCancel) && map(BreakPoints) >= 1
+trigger1 = ctrl || map(EvaCancel) > 0 && map(BreakPoints) >= 1
 
 ;===========================================================================
 ;-------------------------- UNIVERSAL THROWS -------------------------------
@@ -5812,7 +5812,8 @@ ID = 1011
 ;============================
 [State 0, Jump Cancel]
 type 		= MapSet
-trigger1 		= movecontact && stateno < 2000|| map(Eva_WhiffCancel)
+triggerall      = !(name = "Lianghua" && stateno = 1010 && animelemno(0) < 9)
+trigger1 		= movecontact && stateno < 2000 || map(Eva_WhiffCancel)
 map 			= "EVACancel"
 value 		= 1
 ignorehitpause 	= 1

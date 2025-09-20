@@ -108,7 +108,7 @@ ignorehitpause = 1
 type = DisplayToClipboard
 trigger1 = 1
 text = "camerapos x = %0.1f Nibble = %f"
-params = camerapos x, map(Nibble)
+params = camerapos x, map(nibble)
 
 [State 0, nibble] ;NIBBLE
 type 		= MapAdd
@@ -119,8 +119,8 @@ ignorehitpause = 1
 
 [State 0, Jump Cancel] ;Fireball
 type 		= MapAdd
-triggerall	= numhelper(1000)
-triggerall	= helper(1000), movehit = 1 && enemy, movetype = H
+triggerall	= numhelper(1005)
+triggerall	= helper(1005), movehit = 1 && enemy, movetype = H
 triggerall	= map(BreakPoints) < 5
 trigger1 		= !map(ComboStateCheck)
 map 			= "BreakPoints"
