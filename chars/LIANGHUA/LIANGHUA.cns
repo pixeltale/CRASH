@@ -107,11 +107,11 @@ ignorehitpause = 1
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "camerapos x = %0.1f Nibble = %f"
+text = "camerapos x = %0.1f nibble = %f"
 params = camerapos x, map(nibble)
 
 [State 0, nibble] ;NIBBLE
-type 		= MapAdd
+type 		= MapSet
 trigger1 		= roundstate != 2
 map 			= "NIBBLE"
 value 		= 0
@@ -142,6 +142,99 @@ trigger1 = enemy, stateno = [5300, 5301]
 value = 99
 ctrl = 0
 ignorehitpause = 1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(1) && teamside = 1
+trigger1	= map(Nibble) = 1
+anim 	= 1015
+ID 		= 1
+postype 	= left
+pos		= 20, 130
+scale 	= 0.4, 0.4
+removetime 	= -1
+sprPriority 	= -10
+ownpal		= 1
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(2) && teamside = 1
+trigger1	= map(Nibble) = 2
+anim 	= 1015
+ID 		= 2
+postype 	= left
+pos		= 35, 130
+scale 	= 0.4, 0.4
+removetime 	= -1
+sprPriority 	= -10
+ownpal		= 1
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(3) && teamside = 1
+trigger1	= map(Nibble) = 3
+anim 	= 1015
+ID 		= 3
+postype 	= left
+pos		= 50, 130
+scale 	= 0.4, 0.4
+removetime 	= -1
+sprPriority 	= -10
+ownpal		= 1
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(1) && teamside = 2
+trigger1	= map(Nibble) = 1
+anim 	= 1015
+ID 		= 1
+postype 	= right
+pos		= -20, 130
+scale 	= 0.4, 0.4
+removetime 	= -1
+sprPriority 	= -10
+ownpal		= 1
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(2) && teamside = 2
+trigger1	= map(Nibble) = 2
+anim 	= 1015
+ID 		= 2
+postype 	= right
+pos		= -35, 130
+scale 	= 0.4, 0.4
+removetime 	= -1
+sprPriority 	= -10
+ownpal		= 1
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(3) && teamside = 2
+trigger1	= map(Nibble) = 3
+anim 	= 1015
+ID 		= 3
+postype 	= right
+pos		= -50, 130
+scale 	= 0.4, 0.4
+removetime 	= -1
+sprPriority 	= -10
+ownpal		= 1
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = map(Nibble) < 1
+id = 1
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = map(Nibble) < 2
+id = 2
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = map(Nibble) < 3
+id = 3
+
+
+
+
+
+
+
+
 
 [State 0, Explod]
 type = Explod

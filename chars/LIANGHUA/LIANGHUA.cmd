@@ -16,6 +16,11 @@ name = "holdback";Required (do not remove)
 command = /$B
 time = 1
 buffer.time = 0
+[Command]
+name = "holdup" ;Required (do not remove)
+command = /$U
+time = 1
+buffer.time = 0
 
 [Command]
 name = "HOLD_UP" ;Required (do not remove)
@@ -27,10 +32,6 @@ name = "up" ;Required (do not remove)
 command = $U
 time = 1
 buffer.time = 0
-[Command]
-name = "holdup" ;Required (do not remove)
-command = /$U
-time = 1
 
 [Command]
 name = "holddown";Required (do not remove)
@@ -93,15 +94,15 @@ trigger2 = ctrl
 ;Double Jump Raw
 [State -1,DJC]
 type 	= ChangeState
-value 	= 1040
-triggerall = statetype = A && map(AirActions) < const(AirActionMax)
-triggerall = command = "up" && map(doubleJump_BUFFFIX) < 2 && map(Float) < 1
+value 	= 1050
+triggerall = statetype = A && map(Float) < 1
+triggerall = command = "up" && map(doubleJump_BUFFFIX) < 2 
 trigger1 = ctrl
 [State -1,DJC]
 type 	= ChangeState
-value 	= 1040
-triggerall = movecontact && command = "holdup" && map(Float) < 1
-triggerall = statetype = A && map(AirActions) < const(AirActionMax)
+value 	= 1050
+triggerall = movecontact && command = "holdup"
+triggerall = statetype = A  && map(Float) < 1
 trigger1 = ctrl && stateno != 1040 
 trigger2 = movecontact && hitdefattr = A, NA, SA
 trigger3 =  stateno=45 || stateno=46|| stateno=50
@@ -117,7 +118,6 @@ triggerall = stateno !=100
 triggerall = statetype != A
 trigger1 = ctrl
 trigger2 = stateno = 250
-
 ;Backdash
 [State -1, Backdash]
 type = ChangeState
@@ -158,11 +158,18 @@ trigger1 = var(2)
 
 
 ;===========================================================================
-;2S: Overheel
+;j2S: Overheel
 [State -1, OVERKICK!]
 type = changeState
 value = 1035
 triggerall = command = "SPECIAL" && command = "holddown"
+triggerall = statetype = A
+trigger1 = var(1) || stateno = 1040 && MoveContact
+;j5S: Shatterspleen
+[State -1, OVERKICK!]
+type = changeState
+value = 1040
+triggerall = command = "SPECIAL" && command != "holddown"
 triggerall = statetype = A
 trigger1 = var(1)
 

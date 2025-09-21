@@ -11,7 +11,7 @@ velset = 0, 0
 [State 0, VarSet]
 type = VarSet
 trigger1 = !time
-sysvar(1) = prevstateno = [200,1035]
+sysvar(1) = prevstateno = [200,1040]
 [State 0, EVA Cancel]
 type 		= MapAdd
 triggerall	= !TIME
@@ -42,7 +42,7 @@ flag = noairguard
 [State 100, 1]
 type = VelSet
 trigger1 = time = 0
-x = 2.5 + map(nibble)
+x = 2.5 + (map(nibble) * 2)
 
 [State - Air Option Limiter - Airdash]
 type = mapadd
@@ -79,7 +79,7 @@ ctrl = 0
 [State 0, VarSet]
 type = VarSet
 trigger1 = !time
-sysvar(1) = prevstateno = [200,1035]
+sysvar(1) = prevstateno = [200,1040]
 [State 0, EVA Cancel]
 type 		= MapAdd
 triggerall	= !TIME

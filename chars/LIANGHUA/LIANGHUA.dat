@@ -29,9 +29,14 @@ MIDNIGHT SNACK	-		_B^B
 BLEEDING CRESCENT (AIR OK!)	-		_D^B 
    <#bbbbbb>A fast kick that must be guarded standing.
    Ground bounces the opponent on hit.</>
+RUPTURE (AIR OK!)	-		^B 
+   <#bbbbbb>A multi-hitting airborne attack that can be
+   canceled into BLEEDING CRESCENT. Restands
+   the opponent.</>
 HUNTER, KILLER (AIR ONLY)	-		_U 
-   <#bbbbbb>A float maneuver. After releasing the button,
-   Lianghua will lunge in the direction held.</>
+   <#bbbbbb>A float maneuver that can be used to cancel
+   special moves. Lianghua will fly in the direction
+   held after a set duration.</>
 
 <#190bd9>EXTRA SPECIAL MOVES (3 Break Points)</>
 EXPLODE	-		^A + ^B
