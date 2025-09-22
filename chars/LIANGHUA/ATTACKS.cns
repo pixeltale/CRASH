@@ -1083,7 +1083,7 @@ damage 			= 0
 animtype 			= light
 air.animtype 		= back
 ;==============================================
-guardflag 		= HA
+guardflag 		= MA
 hitflag 			= MAFD
 ;==============================================
 pausetime 		= 1 + 3*animelem = 3, 2 + 3*animelem = 3
