@@ -132,6 +132,12 @@ trigger1 		= gamemode = "Training" && command = "start"
 map 			= "BreakPoints"
 value 		= 5
 ignorehitpause = 1
+[State 0, Jump Cancel] ;Fireball
+type 		= MapAdd
+trigger1 		= gamemode = "Training" && map(Nibble) < 3
+map 			= "Nibble"
+value 		= 1
+ignorehitpause = 1
 
 [State 0, ChangeState]
 type = ChangeState
