@@ -5531,7 +5531,7 @@ trigger1 = ctrl || map(EvaCancel) > 0 && map(BreakPoints) >= 1
 type = ChangeState
 value = 66
 triggerall = command = "holdback"
-triggerall = command = "EVADE"
+triggerall = stateno != 65 && command = "EVADE" || stateno = 65 && command = "EVADE_NOBUFFER"
 triggerall = statetype != A && stateno != 66
 trigger1 = ctrl || map(EvaCancel) > 0 && map(BreakPoints) >= 1
 
