@@ -60,6 +60,11 @@ type    = C
 physics = C
 anim = 10
 
+[State 0, 3] ;Stop moving if low velocity or 10 ticks pass after walk states or backdash
+type = VelSet
+trigger1 = prevstateno = 105
+x = const(velocity.run.back.x)
+
 [State 10, 3]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -71,6 +76,7 @@ value = 11
 type    = C
 physics = C
 anim = 11
+facep2 = 1
 sprpriority = 0
 
 [State 11, 1] ;Change from turning animation
@@ -136,11 +142,6 @@ ctrl = 0
 sprpriority = 1
 facep2 = 1
 
-[State 45, 6]
-type = VelSet
-trigger1 = vel x < 0
-x = 1
-
 [state 40, Vulnerability]
 type = hitby
 trigger1 = 1
@@ -179,7 +180,7 @@ y = const(velocity.jump.y)
 type = VelSet
 triggerall = sysvar(1) = -1
 trigger1 = animtime = 0
-x = const(velocity.jump.back.x)
+x = const(velocity.jump.back.x) + (vel x * 0.65)
 y = const(velocity.jump.y)
 
 [State 40, 6]
@@ -5394,7 +5395,7 @@ y = .45
 
 [State 5301, Hit wall]
 type = SelfState
-triggerall = vel x < -2 && pos y < -20
+triggerall = vel x < -2 && pos y < -10
 trigger1 = backedgebodydist <= 0 && (abs(camerapos x) > 435 && facing * camerapos x < 0)
 value = 5305
 

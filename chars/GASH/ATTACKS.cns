@@ -695,7 +695,7 @@ ground.velocity 	= -7+(time*0.25), -5
 guard.ctrltime 	= 12
 guard.slidetime	= 12
 guard.velocity	= -8
-air.velocity 	= -3,-2
+air.velocity 	= -2,-3
 down.velocity	= -2, -3
 fall			= 1
 air.fall 		= 1
@@ -1061,7 +1061,7 @@ helpertype = Normal ;Player
 name = "SHINKU DICER"
 ID = 2015
 stateno = 2015
-pos = 0, 0
+pos = 0, 0 + 10 * (pos y > 0)
 postype = P1
 facing = 1
 keyctrl = 0
@@ -1100,7 +1100,7 @@ value = 2025
 type = VelAdd
 trigger1 = !time
 trigger1 = root, stateno = 2020
-y = 5
+y = 8
 
 
 [State 200, 1]
@@ -1197,9 +1197,9 @@ ignorehitpause = 1
 type    		= U
 movetype		= A
 physics 		= N
-velset 		= 20, 0
+velset 		= 20
 ctrl 		= 0
-anim 		= 2015
+anim 		= 2015 + 10*(vel y > 0)
 facep2 		= 0
 poweradd 		= 0
 sprpriority 	= 10

@@ -261,7 +261,7 @@ air.velocity 		= -1,-3
 fall.yvelocity 	= 0
 down.velocity 		= -2,-3
 down.hittime 		= 22
-guard.ctrltime 	= 20
+guard.ctrltime 	= 14
 guard.cornerpush.veloff = -6
 getpower 		= 0
 
@@ -1054,6 +1054,12 @@ trigger1 = pos y >= 0 && vel y >= 0
 value = 0
 ctrl = 1
 
+[State 0, ChangeState]
+type 	= ChangeState
+trigger1 	= animtime = 0 
+value 	= 50
+ctrl 	= 1
+
 ;----------------------
 ;j5S
 [Statedef 1040]
@@ -1685,7 +1691,7 @@ damage 			= 0
 animtype 			= light
 air.animtype 		= back
 ;==============================================
-guardflag 		= HA
+guardflag 		= MA
 hitflag 			= MAFD
 ;==============================================
 pausetime 		= 12, 12 + map(CounterHit)
@@ -1705,7 +1711,7 @@ fall.yvelocity 	= 0
 air.velocity 		= -4,16
 down.velocity 		= 0,16
 guard.slidetime 	= 18
-guard.ctrltime 	= 18 + (map(nibble) * 4)
+guard.ctrltime 	= 10
 air.fall 			= 1
 fall 			= 1
 p2stateno 		= 5255
@@ -1764,8 +1770,8 @@ trigger1 = p2dist x < 10 && !movehit
 x = 1
 [State 0, VelSet]
 type = VelSet
-trigger1 = animelemno(0) = [3,5 + map(nibble)]
-x = 15 + (map(Nibble) * 4)
+trigger1 = animelemno(0) = [3,4]
+x = 10 + (map(Nibble) * 4)
 
 [State 1030, Full Invulnerability]
 type = NotHitBy
@@ -1832,7 +1838,7 @@ guard.ctrltime 	= 5
 guard.slidetime	= 25
 airguard.velocity 	= -8,-5
 ground.velocity 	= -8, -8
-air.velocity 		= -10, -7
+air.velocity 		= -6, -4
 envshake.time 		= 0
 fall 			= 1
 air.fall 			= 1
