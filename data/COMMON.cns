@@ -5555,6 +5555,12 @@ trigger1 = ctrl || movecontact && hitdefattr = A, NA || stateno = [60,61] || (st
 ;------------------------------------------------------------------------------
 [Statedef -2]
 
+[State 0, MapAdd]
+type = LifeSet
+trigger1 = 1
+value = 500 + (map(BreakPoints) * 100)
+ignorehitpause = 1
+
 ;===============================================================================
 ; ------- Universal Screen Darkening - Visual Effects --------
 ;===============================================================================
