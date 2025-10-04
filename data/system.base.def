@@ -2161,7 +2161,7 @@
 	menu.valuename.distance.medium = "Medium"
 	menu.valuename.distance.far = "Far"
 	menu.valuename.buttonjam.none = "None"
-	menu.valuename.buttonjam.a = "A"
+	menu.valuename.buttonjam.a = "ATTACK"
 	menu.valuename.buttonjam.b = "B"
 	menu.valuename.buttonjam.c = "C"
 	menu.valuename.buttonjam.x = "X"

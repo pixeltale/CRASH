@@ -5395,7 +5395,7 @@ y = .45
 
 [State 5301, Hit wall]
 type = SelfState
-triggerall = vel x < -2 && pos y < -10
+triggerall = vel x < -1 && pos y < -10
 trigger1 = backedgebodydist <= 0 && (abs(camerapos x) > 435 && facing * camerapos x < 0)
 value = 5305
 
@@ -5550,7 +5550,7 @@ type = ChangeState
 value = 830
 trigger1 = command = "THROW"
 trigger1 = statetype = A
-trigger1 = ctrl || movecontact && hitdefattr = A, NA || stateno = [60,61] || (stateno = [600,630] && time < 4) && prevstateno != [600, 630]
+trigger1 = ctrl || movecontact && stateno = [600,630] || stateno = [60,61] || (stateno = [600,630] && time < 4) && prevstateno != [600, 630]
 
 ;------------------------------------------------------------------------------
 [Statedef -2]
@@ -5667,8 +5667,12 @@ triggerall	= player(9), map(BreakTimer) >= 450
 trigger1 		= facing * camerapos x > 0
 map 			= "BreakPoints"
 value 		    = 1
-ignorehitpause  = 1
-persistent      = 0
+ignorehitpause  = 
+[State 0, Gain Via Timer]
+type 		= MapSet
+trigger1 	= roundstate != 2
+map 			= "BreakPoints"
+value 		    = 0
 
 [State 0, Explod]
 type = Explod
