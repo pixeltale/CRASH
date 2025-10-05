@@ -827,7 +827,7 @@ pos = 160,23
 counter.offset = 0,0
 counter.font = 2,0, 0
 ; Ticks for each count
-framespercount = 60
+framespercount = 90
 
 ;-----------------------------------------------------------
 [Combo]

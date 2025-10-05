@@ -79,10 +79,10 @@ AIRTHROW.DISTY = 60
 
 [Quotes]
 ; Up to 100 victory quotes can be specified per language (victory0 - victory99)
-victory1 = "Im Gash! and youre trash!"
-victory2 = "Suck a nigga diiih..."
-victory3 = "I dont got internet."
-victory4 = "Cease and desist on the 'Like That' record...?"
+victory1 = "I just wanna go home to my cat..."
+victory2 = "I dont know what WeChat is! Stop asking!"
+victory3 = "Being a vampire actually isnt that bad! Coffins are surprisingly ergonomic."
+victory4 = "You LOOK like a Drake fan."
 
 [ja.Quotes]
 victory1 = "私は私のベルトで長年の経験を持っています、あなたは知っています。"

@@ -3559,6 +3559,19 @@ physics = N
 anim  = 5101
 velset = vel x,0
 
+;--------------------------------
+;DISABLE SCREEN TRANSITION FX
+[State 0, Camera]
+type = Camera
+trigger1 = !TIME
+view = FIGHTING
+[State 0, ModifyStageVar]
+type = ModifyStageVar
+trigger1 = !TIME
+camera.verticalfollow = 0
+camera.tension          = 120
+;--------------------------------
+
 [State 0, ScreenBound]
 type = ScreenBound
 triggerall = prevstateno = 5301
@@ -3621,8 +3634,16 @@ y = 0
 
 [State 0, ChangeState]
 type = SelfState
-trigger1 = time > 20 + 10 * (prevstateno = 5301)
+trigger1 = alive
+trigger1 = time > 20 + 10 * (prevstateno = 5301) 
 value = 5205
+ctrl = 0
+
+[State 0, ChangeState]
+type = SelfState
+trigger1 = !alive
+trigger1 = time > 40
+value = 5111
 ctrl = 0
 
 ;---------------------------------------------------------------------------
@@ -5412,37 +5433,113 @@ physics = N
 velset  = vel x, 0
 anim    = 5030
 
-[State 0, LifeAdd]
-type = LifeAdd
-trigger1 = !time
-value = -9999999999999999
-kill = 1
+[State 1030, Full Invulnerability]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+ignorehitpause = 1
+persistent = 1
+
+[State 0, Subtract]
+type 		= MapAdd
+trigger1 	= !time
+map 			= "Hearts"
+value 		    = -1
 
 [State 0, VelSet]
 type = VelSet
 trigger1 = 1
 x = 0
-
-[State 0, VelAdd]
-type = VelAdd
-trigger1 = time > 11
-x = 0
-y = .11
-
-[State 1028, Vel Y]
-type = VelSet
-trigger1 = time <= 11
 y = 0
 
-[State 1028, Vel X]
+[State 0, MapSet]
+type = MapSet
+trigger1 = !time
+map = "SLOWDOWNTIME"
+value = 20
+ignorehitpause = 1
+
+; [State 1028, Hit ground]
+; type = ChangeState
+; trigger1 = (Vel y >= 0) && (Pos y >= 0)
+; value = 5150
+
+[State 1028, Hit ground]
+type = ChangeState
+trigger1 = time = 10
+value = 5306
+
+
+;Ringout - Area Shift
+[Statedef 5306]
+type    = A
+movetype= H
+physics = N
+velset  = 0, 0
+anim    = 5160
+
+[State 0, EVERYTHING WILL FREEZE!]
+type = SuperPause
+triggerall = map(slowdownTime)
+trigger1 = gametime % 2 = 0
+time = 2
+anim = 99999
+pos = 0,0
+movetime = 2
+darken = 0
+p2defmul = 1
+unhittable = 1
+
+[State 0, Camera]
+type = Camera
+trigger1 = 1
+view = Follow
+followid = id
+persistent = 0
+[State 0, ModifyStageVar]
+type = ModifyStageVar
+trigger1 = time < 90
+camera.verticalfollow = 1
+camera.tension = 400
+
+
+[State 1028, Hit ground]
+type = ChangeState
+trigger1 = time < 90 && enemy, backedgebodydist > -440
+value = 99
+redirectid = enemy, id
+
+[State 0, BGPalFX]
+type = BGPalFX
+trigger1 = time < 90
+time = 5
+add = -time * 1.5,-time * 1.5,-time * 1.5
+persistent = 1
+ignorehitpause = 1
+
+[State 0, LifeAdd]
+type = LifeAdd
+trigger1 = !time && map(Hearts) <= 0
+value = -9999999999999999
+kill = 1
+
+[State 0, VelAdd]
 type = VelSet
-trigger1 = Time = 0
-x = -.7
+trigger1 = time > 90
+x = -10
+y = .11 + (time * 0.05)
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time < 90
+x = 50
+y = cond(pos y > -190, -2, 1 )
 
 [State 1028, Hit ground]
 type = ChangeState
 trigger1 = (Vel y >= 0) && (Pos y >= 0)
-value = 5150
+value = 5200
 
 ;---------------------------------------------------------------------------
 ; Continue screen animation
@@ -5554,6 +5651,19 @@ trigger1 = ctrl || movecontact && stateno = [600,630] || stateno = [60,61] || (s
 
 ;------------------------------------------------------------------------------
 [Statedef -2]
+
+[State 0, Gain Via Timer]
+type 		= MapSet
+trigger1 	= roundstate = 0
+map 			= "Hearts"
+value 		    = 2
+
+[State 0, MapAdd]
+type = MapAdd
+trigger1 = map(Slowdowntime)
+map = "SLOWDOWNTIME"
+value = -1
+ignorehitpause = 1
 
 [State 0, MapAdd]
 type = LifeSet
@@ -5817,6 +5927,80 @@ type = RemoveExplod
 trigger1 = map(BreakPoints) < 1
 ID = 1011
 
+
+;============================
+; Health Points            ||
+;============================
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 1
+trigger1 = map(Hearts) > 0 && !numexplod(5)
+anim = F1010
+ID = 5
+postype = left
+pos = 12, 26
+scale = 0.35, 0.3
+removetime = -1
+sprPriority = 10
+ignorehitpause = 1
+ownpal = 1
+palfx.time = -1
+palfx.add = 255, -100, -100
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 1
+trigger1 = map(Hearts) > 1 && !numexplod(6)
+anim = F1010
+ID = 6
+postype = left
+pos = 26, 28
+scale = 0.35, 0.3
+removetime = -1
+sprPriority = 10
+ignorehitpause = 1
+ownpal = 1
+palfx.time = -1
+palfx.add = 255, -100, -100
+
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 2
+trigger1 = map(Hearts) > 0 && !numexplod(5)
+anim = F1010
+ID = 5
+postype = right
+pos = -12, 26
+scale = -0.35, 0.3
+removetime = -1
+sprPriority = 10
+ignorehitpause = 1
+ownpal = 1
+palfx.time = -1
+palfx.add = 255, -100, -100
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 2
+trigger1 = map(Hearts) > 1 && !numexplod(6)
+anim = F1010
+ID = 6
+postype = right
+pos = -26, 28
+scale = -0.35, 0.3
+removetime = -1
+sprPriority = 10
+ignorehitpause = 1
+ownpal = 1
+palfx.time = -1
+palfx.add = 255, -100, -100
+
+[State 0, Explod]
+type = RemoveExplod
+trigger1 = map(Hearts) < 1
+ID = 5
+[State 0, Explod]
+type = RemoveExplod
+trigger1 = map(Hearts) < 2
+ID = 6
 
 ;============================
 ; Cancel Variables      ||

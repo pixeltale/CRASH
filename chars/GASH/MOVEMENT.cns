@@ -323,6 +323,11 @@ trigger1 = 1
 flag = NoWalk
 flag2 = NoAutoTurn
 
+[State 99, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = time < 5 || backedgebodydist < -15
+flag = Invisible
+
 [State 99, 3]
 type 	= ChangeState
 trigger1 		= BackEdgeBodyDist > 0
