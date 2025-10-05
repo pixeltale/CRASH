@@ -1278,6 +1278,13 @@ trigger1 		= !TIME
 map 			= "BreakPoints"
 value 		= -2
 ignorehitpause = 1
+[State 0, nibble] ;NIBBLE
+type 		= MapAdd
+triggerall	= map(Nibble) < 3
+trigger1 		= !time
+map 			= "NIBBLE"
+value 		= 1
+ignorehitpause = 0
 
 [State 1030, Full Invulnerability]
 type = NotHitBy
