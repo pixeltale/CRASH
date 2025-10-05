@@ -2118,8 +2118,10 @@ local txt_recordSelect = main.f_createTextImg(motif.select_info, 'record')
 local txt_timerSelect = main.f_createTextImg(motif.select_info, 'timer')
 local txt_selStage = main.f_createTextImg(motif.select_info, 'stage_active')
 local t_txt_name = {}
+local t_txt_ES = {}
 for i = 1, 2 do
 	table.insert(t_txt_name, main.f_createTextImg(motif.select_info, 'p' .. i .. '_name'))
+	table.insert(t_txt_ES, main.f_createTextImg(motif.select_info, 'p' .. i .. '_name'))
 end
 
 if main.t_sort.select_info.teammenu == nil then
@@ -2366,6 +2368,74 @@ function start.f_selectScreen()
 							xshear = motif.select_info['p' .. side .. '_name_xshear'],
 							angle  = motif.select_info['p' .. side .. '_name_angle'],
 						})
+						t_txt_name[side]:draw()
+					end
+				end
+			end
+			if #start.p[side].t_selTemp > 0 then
+				for i = 1, #start.p[side].t_selTemp do
+					if i <= 1 then
+						local ES_p1 = ''
+						local ES_p2 = ''
+						if selES1 == 1 then
+							ES_p1 = 'EXTRA \n SPECIAL 1'
+						elseif selES1 == 2 then
+							ES_p1 = 'EXTRA \n SPECIAL 2'
+						end
+						if selES2 == 1 then
+							ES_p2 = 'EXTRA \n SPECIAL 1'
+						elseif selES2 == 2 then
+							ES_p2 = 'EXTRA \n SPECIAL 2'
+						end
+						t_txt_name[1]:update({
+							font =   motif.select_info['p' .. side .. '_name_font'][1],
+							bank =   motif.select_info['p' .. side .. '_name_font'][2],
+							align =  motif.select_info['p' .. side .. '_name_font'][3],
+							text =   ES_p1,
+							x =      motif.select_info['p' .. side .. '_name_offset'][1] + (i - 1) * motif.select_info['p' .. side .. '_name_spacing'][1],
+							y =      motif.select_info['p' .. side .. '_name_offset'][2] + (i - 1) * motif.select_info['p' .. side .. '_name_spacing'][2] + 30,
+							scaleX = motif.select_info['p' .. side .. '_name_scale'][1] - 0.2,
+							scaleY = motif.select_info['p' .. side .. '_name_scale'][2] - 0.2,
+							r =      motif.select_info['p' .. side .. '_name_font'][4],
+							g =      motif.select_info['p' .. side .. '_name_font'][5],
+							b =      motif.select_info['p' .. side .. '_name_font'][6],
+							height = motif.select_info['p' .. side .. '_name_font'][7],
+							xshear = 0.5,
+							angle  = motif.select_info['p' .. side .. '_name_angle'],
+						})
+						-- t_txt_ES[1]:update({
+						-- 	font =   motif.select_info['p' .. side .. '_name_font'][1],
+						-- 	bank =   motif.select_info['p' .. side .. '_name_font'][2],
+						-- 	align =  motif.select_info['p' .. side .. '_name_font'][3],
+						-- 	text =   '<<            >>',
+						-- 	x =      motif.select_info['p' .. side .. '_name_offset'][1] + (i - 1) - 15,
+						-- 	y =      motif.select_info['p' .. side .. '_name_offset'][2] + (i - 1) + 32,
+						-- 	scaleX = motif.select_info['p' .. side .. '_name_scale'][1],
+						-- 	scaleY = motif.select_info['p' .. side .. '_name_scale'][2],
+						-- 	r =      motif.select_info['p' .. side .. '_name_font'][4],
+						-- 	g =      motif.select_info['p' .. side .. '_name_font'][5],
+						-- 	b =      motif.select_info['p' .. side .. '_name_font'][6],
+						-- 	height = motif.select_info['p' .. side .. '_name_font'][7],
+						-- 	xshear = 0.5,
+						-- 	angle  = motif.select_info['p' .. side .. '_name_angle'],
+						-- })
+						t_txt_name[2]:update({
+							font =   motif.select_info['p' .. side .. '_name_font'][1],
+							bank =   motif.select_info['p' .. side .. '_name_font'][2],
+							align =  motif.select_info['p' .. side .. '_name_font'][3],
+							text =   ES_p2,
+							x =      motif.select_info['p' .. side .. '_name_offset'][1] + (i - 1) * motif.select_info['p' .. side .. '_name_spacing'][1],
+							y =      motif.select_info['p' .. side .. '_name_offset'][2] + (i - 1) * motif.select_info['p' .. side .. '_name_spacing'][2] + 30,
+							scaleX = motif.select_info['p' .. side .. '_name_scale'][1] - 0.2,
+							scaleY = motif.select_info['p' .. side .. '_name_scale'][2] - 0.2,
+							r =      motif.select_info['p' .. side .. '_name_font'][4],
+							g =      motif.select_info['p' .. side .. '_name_font'][5],
+							b =      motif.select_info['p' .. side .. '_name_font'][6],
+							height = motif.select_info['p' .. side .. '_name_font'][7],
+							xshear = 0.5,
+							angle  = motif.select_info['p' .. side .. '_name_angle'],
+						})
+						t_txt_ES[side]:draw()
 						t_txt_name[side]:draw()
 					end
 				end
@@ -2771,24 +2841,6 @@ end
 --;===========================================================
 --; SELECT MENU
 --;===========================================================
--- Load Animation Data
-function start.f_ESAnimGet(ref, group, loop, side)
-	local t = {}
-	for i = 1, 3 do
-		local a = animGetPreloadedData('char', ref, group + i, -1, loop)
-		if a ~= nil then
-			if side == 1 then
-				animSetPos(a, 0, 35)
-			else
-				animSetPos(a, 210, 35)
-				animSetFacing(a, 1)
-			end
-			animUpdate(a)
-			table.insert(t, a)
-		end
-	end
-	return t
-end
 
 function start.f_selectMenu(side, cmd, player, member, selectState)
 	local theSide = side
