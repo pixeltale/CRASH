@@ -2,16 +2,7 @@
   "modes": {
     "training": {
       "playtime": 0
-    },
-    "freebattle": {
-      "playtime": 318.9
-    },
-    "watch": {
-      "playtime": 0
-    },
-    "netplayversus": {
-      "playtime": 5193.22
     }
   },
-  "playtime": 5512.12
+  "playtime": 0
 }

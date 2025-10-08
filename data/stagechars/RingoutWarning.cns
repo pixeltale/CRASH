@@ -1,6 +1,10 @@
 ;Ringout Warning and Vorpal Timer
 [Statedef -2]
-
+[State 0, ScreenBound]
+type = ScreenBound
+trigger1 = 1
+value = 0
+movecamera = 0,0
 
 [State 0, VarSet]
 type = VarSet
@@ -75,7 +79,7 @@ trans = none
 type = ModifyExplod
 trigger1 = sysvar(1)
 ID = 1015
-trans = Alpha
+trans = AddAlpha
 alpha = 100, 100
 
 ;Timer Explod

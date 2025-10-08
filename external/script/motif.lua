@@ -1,7 +1,7 @@
 --;===========================================================
 --; DEFAULT VALUES
 --;===========================================================
-local verInfo = main.f_fileRead("external/script/version", "r")
+local verInfo = main.f_fileRead("external/script/version", "r", true) or "local"
 
 --This pre-made table (3/4 of the whole file) contains all default values used in screenpack. New table from parsed DEF file is merged on top of this one.
 --This is important because there are more params available in Ikemen. Whole screenpack code refers to these values.
@@ -165,6 +165,7 @@ local motif =
 		menu_accept_key = 'a&b&c&x&y&z&s', --Ikemen feature
 		menu_hiscore_key = 's', --Ikemen feature
 		menu_pos = {159, 158},
+		menu_tween_factor = 0.3, --Ikemen feature
 		--menu_bg_<itemname>_anim = -1, --Ikemen feature
 		--menu_bg_<itemname>_spr = {}, --Ikemen feature
 		--menu_bg_<itemname>_offset = {0, 0}, --Ikemen feature
@@ -197,6 +198,8 @@ local motif =
 		menu_window_margins_y = {12, 8},
 		menu_window_visibleitems = 5,
 		menu_boxcursor_visible = 1,
+		menu_boxcursor_tween_snap = 0, --Ikemen feature
+		menu_boxcursor_tween_factor = 0.3, --Ikemen feature
 		menu_boxcursor_coords = {-40, -10, 39, 2},
 		menu_boxcursor_col = {255, 255, 255}, --Ikemen feature
 		menu_boxcursor_alpharange = {10, 40, 2, 255, 255, 0}, --Ikemen feature
@@ -302,9 +305,7 @@ local motif =
 		--cell_<col>_<row>_offset = {0, 0}, --Ikemen feature
 		--cell_<col>_<row>_facing = 1, --Ikemen feature
 		--cell_<col>_<row>_skip = 0, --Ikemen feature
-		p1_cursor_tween = 0, --Ikemen feature
-		p1_cursor_tween_speed = {4, 4}, --Ikemen feature
-		p1_cursor_tween_wrap_speed = {0, 0}, --Ikemen feature
+		p1_cursor_tween_factor = {0.3, 0.3}, --Ikemen feature
 		p1_cursor_startcell = {0, 0},
 		p1_cursor_active_anim = -1,
 		p1_cursor_active_spr = {},
@@ -320,9 +321,7 @@ local motif =
 		p1_cursor_done_snd = {100, 1},
 		p1_cursor_reset = 0, --Ikemen feature
 		p1_random_move_snd = {100, 0},
-		p2_cursor_tween = 0, --Ikemen feature
-		p2_cursor_tween_speed = {4, 4}, --Ikemen feature
-		p2_cursor_tween_wrap_speed = {0, 0}, --Ikemen feature
+		p2_cursor_tween_factor = {0.3, 0.3}, --Ikemen feature
 		p2_cursor_startcell = {0, 4},
 		p2_cursor_active_anim = -1,
 		p2_cursor_active_spr = {},
@@ -408,6 +407,7 @@ local motif =
 		p1_face_window = {},
 		p1_face_spacing = {0, 0}, --Ikemen feature
 		p1_face_padding = 0, --Ikemen feature
+		p1_face_applypal = 0, --Ikemen Feature
 		p2_face_pos = {0, 0},
 		p2_face_num = 1, --Ikemen feature
 		p2_face_anim = -1, --Ikemen feature
@@ -420,6 +420,7 @@ local motif =
 		p2_face_window = {},
 		p2_face_spacing = {0, 0}, --Ikemen feature
 		p2_face_padding = 0, --Ikemen feature
+		p2_face_applypal = 0, --Ikemen Feature
 		--p<pn>_member<num>_face_anim = -1, --Ikemen feature
 		--p<pn>_member<num>_face_spr = {9000, 1}, --Ikemen feature
 		--p<pn>_member<num>_face_done_anim = -1, --Ikemen feature
@@ -428,6 +429,8 @@ local motif =
 		--p<pn>_member<num>_face_scale = {1.0, 1.0}, --Ikemen feature
 		--p<pn>_member<num>_face_slide_speed = {0, 0}, --Ikemen feature
 		--p<pn>_member<num>_face_slide_dist = {0, 0}, --Ikemen feature
+		--p<pn>_member<num>_face_applypal = 0, --Ikemen feature
+		--p<pn>_member<num>_face2_applypal = 0, --Ikemen feature
 		p1_face2_anim = -1, --Ikemen feature
 		p1_face2_spr = {}, --Ikemen feature
 		p1_face2_offset = {0, 0}, --Ikemen feature
@@ -730,6 +733,55 @@ local motif =
 		p2_swap_snd = {-1, 0}, --Ikemen feature
 		p1_select_snd = {-1, 0}, --Ikemen feature (data read from character SND)
 		p2_select_snd = {-1, 0}, --Ikemen feature (data read from character SND)
+		paletteselect = 0, --Ikemen feature
+		--p<pn>_member<num>_palmenu_number_offset = {0, 0}, --Ikemen feature
+		--p<pn>_member<num>_palmenu_number_font = {-1, 0, 0}, --Ikemen feature
+		--p<pn>_member<num>_palmenu_number_scale = {1.0, 1.0}, --Ikemen feature
+		--p<pn>_member<num>_palmenu_number_xshear = 1.0, --Ikemen feature
+		--p<pn>_member<num>_palmenu_number_angle = 1, --Ikemen feature
+		--p<pn>_palmenu_number_offset = {0, 0}, --Ikemen feature
+		--p<pn>_palmenu_number_font = {-1, 0, 0}, --Ikemen feature
+		--p<pn>_palmenu_number_scale = {1.0, 1.0}, --Ikemen feature
+		--p<pn>_palmenu_number_xshear = 1.0, --Ikemen feature
+		--p<pn>_palmenu_number_angle = 1, --Ikemen feature
+		--p<pn>_member<num>_palmenu_text_offset = {0, 0}, --Ikemen feature
+		--p<pn>_member<num>_palmenu_text_font = {-1, 0, 0}, --Ikemen feature
+		--p<pn>_member<num>_palmenu_text_scale = {1.0, 1.0}, --Ikemen feature
+		--p<pn>_member<num>_palmenu_text_xshear = 1.0, --Ikemen feature
+		--p<pn>_member<num>_palmenu_text_angle = 1, --Ikemen feature
+		--p<pn>_palmenu_text_offset = {0, 0}, --Ikemen feature
+		--p<pn>_palmenu_text_font = {-1, 0, 0}, --Ikemen feature
+		--p<pn>_palmenu_text_scale = {1.0, 1.0}, --Ikemen feature
+		--p<pn>_palmenu_text_xshear = 1.0, --Ikemen feature
+		--p<pn>_palmenu_text_angle = 1, --Ikemen feature
+		--p<pn>_palmenu_text_text = '' --Ikemen feature
+		p1_palmenu_bg_pos = {0, 0}, --Ikemen feature
+		p1_palmenu_bg_anim = -1, --Ikemen feature
+		p1_palmenu_bg_spr = {}, --Ikemen feature
+		p1_palmenu_bg_offset = {0, 0}, --Ikemen feature
+		p1_palmenu_bg_facing = 1, --Ikemen feature
+		p1_palmenu_bg_scale = {1.0, 1.0}, --Ikemen feature
+		p2_palmenu_bg_pos = {0, 0}, --Ikemen feature
+		p2_palmenu_bg_anim = -1, --Ikemen feature
+		p2_palmenu_bg_spr = {}, --Ikemen feature
+		p2_palmenu_bg_offset = {0, 0}, --Ikemen feature
+		p2_palmenu_bg_facing = 1, --Ikemen feature
+		p2_palmenu_bg_scale = {1.0, 1.0}, --Ikemen feature
+		p1_palmenu_next_key = '$F', --Ikemen feature
+		p1_palmenu_previous_key = '$B', --Ikemen feature
+		p1_palmenu_accept_key = 'a&b&c', --Ikemen feature
+		p1_palmenu_cancel_key = 'x&y&z', --Ikemen feature
+		p1_palmenu_random_key = 's', --Ikemen feature
+		p1_palmenu_random_text = 'Random', --Ikemen feature
+		p2_palmenu_next_key = '$F', --Ikemen feature
+		p2_palmenu_previous_key = '$B', --Ikemen feature
+		p2_palmenu_accept_key = 'a&b&c', --Ikemen feature
+		p2_palmenu_cancel_key = 'x&y&z', --Ikemen feature
+		p2_palmenu_random_key = 's', --Ikemen feature
+		p2_palmenu_random_text = 'Random', --Ikemen feature
+		palmenu_move_snd = {-1, 0}, --Ikemen feature
+		palmenu_done_snd = {-1, 0}, --Ikemen feature
+		palmenu_cancel_snd = {-1, 0}, --Ikemen feature
 	},
 	selectbgdef =
 	{
@@ -1194,6 +1246,7 @@ local motif =
 		title_text = 'OPTIONS', --Ikemen feature
 		menu_uselocalcoord = 0, --Ikemen feature
 		menu_pos = {85, 33}, --Ikemen feature
+		menu_tween_factor = 0.3, --Ikemen feature
 		--menu_bg_<itemname>_anim = -1, --Ikemen feature
 		--menu_bg_<itemname>_spr = {}, --Ikemen feature
 		--menu_bg_<itemname>_offset = {0, 0}, --Ikemen feature
@@ -1261,6 +1314,8 @@ local motif =
 		menu_window_margins_y = {0, 0}, --Ikemen feature
 		menu_window_visibleitems = 13, --Ikemen feature
 		menu_boxcursor_visible = 1, --Ikemen feature
+		menu_boxcursor_tween_snap = 0, --Ikemen feature
+		menu_boxcursor_tween_factor = 0.3, --Ikemen feature
 		menu_boxcursor_coords = {-5, -10, 154, 3}, --Ikemen feature
 		menu_boxcursor_col = {255, 255, 255}, --Ikemen feature
 		menu_boxcursor_alpharange = {10, 40, 2, 255, 255, 0}, --Ikemen feature
@@ -1415,7 +1470,7 @@ local motif =
 		--menu_itemname_debugkeys = 'Debug Keys', --Ikemen feature
 		--menu_itemname_debugmode = 'Debug Mode', --Ikemen feature
 		--menu_itemname_helpermax = 'HelperMax', --Ikemen feature
-		--menu_itemname_projectilemax = 'PlayerProjectileMax', --Ikemen feature
+		--menu_itemname_projectilemax = 'ProjectileMax', --Ikemen feature
 		--menu_itemname_explodmax = 'ExplodMax', --Ikemen feature
 		--menu_itemname_afterimagemax = 'AfterImageMax', --Ikemen feature
 		--menu_itemname_portchange = 'Port Change', --Ikemen feature
@@ -1446,6 +1501,7 @@ local motif =
 		title_text = 'REPLAY SELECT', --Ikemen feature
 		menu_uselocalcoord = 0, --Ikemen feature
 		menu_pos = {85, 33}, --Ikemen feature
+		menu_tween_factor = 0.3, --Ikemen feature
 		--menu_bg_<itemname>_anim = -1, --Ikemen feature
 		--menu_bg_<itemname>_spr = {}, --Ikemen feature
 		--menu_bg_<itemname>_offset = {0, 0}, --Ikemen feature
@@ -1478,6 +1534,8 @@ local motif =
 		menu_window_margins_y = {0, 0}, --Ikemen feature
 		menu_window_visibleitems = 13, --Ikemen feature
 		menu_boxcursor_visible = 1, --Ikemen feature
+		menu_boxcursor_tween_snap = 0, --Ikemen feature
+		menu_boxcursor_tween_factor = 0.3, --Ikemen feature
 		menu_boxcursor_coords = {-5, -10, 154, 3}, --Ikemen feature
 		menu_boxcursor_col = {255, 255, 255}, --Ikemen feature
 		menu_boxcursor_alpharange = {10, 40, 2, 255, 255, 0}, --Ikemen feature
@@ -1521,6 +1579,7 @@ local motif =
 		title_text = 'PAUSE', --Ikemen feature
 		menu_uselocalcoord = 0, --Ikemen feature
 		menu_pos = {85, 33}, --Ikemen feature
+		menu_tween_factor = 0.3, --Ikemen feature
 		--menu_bg_<itemname>_anim = -1, --Ikemen feature
 		--menu_bg_<itemname>_spr = {}, --Ikemen feature
 		--menu_bg_<itemname>_offset = {0, 0}, --Ikemen feature
@@ -1573,6 +1632,8 @@ local motif =
 		menu_window_margins_y = {0, 0}, --Ikemen feature
 		menu_window_visibleitems = 13, --Ikemen feature
 		menu_boxcursor_visible = 1, --Ikemen feature
+		menu_boxcursor_tween_snap = 0, --Ikemen feature
+		menu_boxcursor_tween_factor = 0.3, --Ikemen feature
 		menu_boxcursor_coords = {-5, -10, 154, 3}, --Ikemen feature
 		menu_boxcursor_col = {255, 255, 255}, --Ikemen feature
 		menu_boxcursor_alpharange = {10, 40, 2, 255, 255, 0}, --Ikemen feature
@@ -1756,6 +1817,7 @@ local motif =
 		menu_previous_key = '$U&$B', --Ikemen feature
 		menu_accept_key = 'a&b&c&x&y&z&s', --Ikemen feature
 		menu_pos = {159, 158}, --Ikemen feature
+		menu_tween_factor = 0.3, --Ikemen feature
 		--menu_bg_<itemname>_anim = -1, --Ikemen feature
 		--menu_bg_<itemname>_spr = {}, --Ikemen feature
 		--menu_bg_<itemname>_offset = {0, 0}, --Ikemen feature
@@ -1788,6 +1850,8 @@ local motif =
 		menu_window_margins_y = {12, 8}, --Ikemen feature
 		menu_window_visibleitems = 5, --Ikemen feature
 		menu_boxcursor_visible = 1, --Ikemen feature
+		menu_boxcursor_tween_snap = 0, --Ikemen feature
+		menu_boxcursor_tween_factor = 0.3, --Ikemen feature
 		menu_boxcursor_coords = {-40, -10, 39, 2},
 		menu_boxcursor_col = {255, 255, 255}, --Ikemen feature
 		menu_boxcursor_alpharange = {10, 40, 2, 255, 255, 0}, --Ikemen feature
@@ -2283,7 +2347,7 @@ function motif.setBaseOptionInfo()
 	motif.option_info.menu_itemname_menuvideo_fullscreen = "Fullscreen"
 	motif.option_info.menu_itemname_menuvideo_vsync = "VSync"
 	motif.option_info.menu_itemname_menuvideo_keepaspect = "Keep Aspect Ratio"
-	motif.option_info.menu_itemname_menuvideo_windowscalemode = "Bilinear Filtering"
+	motif.option_info.menu_itemname_menuvideo_windowscalemode = "Window Scale Mode"
 	motif.option_info.menu_itemname_menuvideo_msaa = "MSAA"
 	motif.option_info.menu_itemname_menuvideo_shaders = "Shaders" --reserved submenu
 	-- This list is populated with shaders existing in 'external/shaders' directory
@@ -2321,9 +2385,10 @@ function motif.setBaseOptionInfo()
 	motif.option_info.menu_itemname_menuengine_debugmode = "Debug Mode"
 	motif.option_info.menu_itemname_menuengine_empty = ""
 	motif.option_info.menu_itemname_menuengine_helpermax = "HelperMax"
-	motif.option_info.menu_itemname_menuengine_projectilemax = "PlayerProjectileMax"
+	motif.option_info.menu_itemname_menuengine_projectilemax = "ProjectileMax"
 	motif.option_info.menu_itemname_menuengine_explodmax = "ExplodMax"
 	motif.option_info.menu_itemname_menuengine_afterimagemax = "AfterImageMax"
+	motif.option_info.menu_itemname_menuengine_palettemax = "PaletteMax"
 	motif.option_info.menu_itemname_menuengine_empty = ""
 	motif.option_info.menu_itemname_menuengine_back = "Back"
 
@@ -2454,6 +2519,7 @@ function motif.setBaseOptionInfo()
 		"menuengine_projectilemax",
 		"menuengine_explodmax",
 		"menuengine_afterimagemax",
+		"menuengine_palettemax",
 		"menuengine_empty",
 		"menuengine_back",
 		"empty",
@@ -2659,6 +2725,22 @@ for line in main.motifData:gmatch('([^\n]*)\n?') do
 						end
 					end
 					pos[param] = value
+				elseif param:match('^palmenu_itemname_') then
+				local subt, append = param:match('^([^_]+)_itemname_(.+)$')
+				if pos_sort[subt] == nil then
+					pos_sort[subt] = {}
+				end
+				table.insert(pos_sort[subt], append)
+				for i = 1, 2 do
+					local prefix = 'p' .. i .. '_'
+					local bg = param:gsub('_itemname_', '_bg_')
+					def_pos[prefix .. bg .. '_anim']   = -1
+					def_pos[prefix .. bg .. '_spr']    = {-1, 0}
+					def_pos[prefix .. bg .. '_offset'] = {0, 0}
+					def_pos[prefix .. bg .. '_facing'] = 1
+					def_pos[prefix .. bg .. '_scale']  = {1.0, 1.0}
+				end
+				pos[param] = value
 				elseif value:match('.+,.+') then --multiple values
 					local fontRef = -1
 					for i, c in ipairs(main.f_strsplit(',', value)) do --split value using "," delimiter
@@ -2950,6 +3032,28 @@ for k, v in pairs(motif) do
 	end
 end
 
+usingPalettes = false
+for i = 1, 3 do
+	if i == 1 then
+		currentSection = 'select_info'
+	elseif i == 2 then
+		currentSection = 'vs_screen'
+	elseif i == 3 then
+		currentSection = 'victory_screen'
+	end
+	for side = 1, 2 do
+		if motif[currentSection]['p' .. side .. '_applypal'] == 1 or motif[currentSection]['p' .. side .. '_face_applypal'] == 1 or motif[currentSection]['p' .. side .. '_face2_applypal'] == 1 then
+			usingPalettes = true
+		end
+		for member = 1, 4 do
+			if motif[currentSection]['p' .. side .. '_member' .. member .. '_face_applypal'] == 1 or motif[currentSection]['p' .. side .. '_member' .. member .. '_face2_applypal'] == 1 then
+				usingPalettes = true
+			end
+		end
+	end
+end
+usePalette(usingPalettes)
+
 local t_pos = motif.select_info
 for _, v in ipairs({
 	{s = 'cell_bg_',                      x = 0,                                                           y = 0},
@@ -2967,6 +3071,7 @@ for _, v in ipairs({
 	{s = 'p1_teammenu_ratio5_icon_',      x = t_pos.p1_teammenu_pos[1] + t_pos.p1_teammenu_item_offset[1], y = t_pos.p1_teammenu_pos[2] + t_pos.p1_teammenu_item_offset[2]},
 	{s = 'p1_teammenu_ratio6_icon_',      x = t_pos.p1_teammenu_pos[1] + t_pos.p1_teammenu_item_offset[1], y = t_pos.p1_teammenu_pos[2] + t_pos.p1_teammenu_item_offset[2]},
 	{s = 'p1_teammenu_ratio7_icon_',      x = t_pos.p1_teammenu_pos[1] + t_pos.p1_teammenu_item_offset[1], y = t_pos.p1_teammenu_pos[2] + t_pos.p1_teammenu_item_offset[2]},
+	{s = 'p1_palmenu_bg_',                x = t_pos.p1_palmenu_bg_pos[1],                                  y = t_pos.p1_palmenu_bg_pos[2]},
 	{s = 'p2_teammenu_bg_',               x = t_pos.p2_teammenu_pos[1],                                    y = t_pos.p2_teammenu_pos[2]},
 	{s = 'p2_teammenu_selftitle_',        x = t_pos.p2_teammenu_pos[1],                                    y = t_pos.p2_teammenu_pos[2]},
 	{s = 'p2_teammenu_enemytitle_',       x = t_pos.p2_teammenu_pos[1],                                    y = t_pos.p2_teammenu_pos[2]},
@@ -2980,6 +3085,7 @@ for _, v in ipairs({
 	{s = 'p2_teammenu_ratio5_icon_',      x = t_pos.p2_teammenu_pos[1] + t_pos.p2_teammenu_item_offset[1], y = t_pos.p2_teammenu_pos[2] + t_pos.p2_teammenu_item_offset[2]},
 	{s = 'p2_teammenu_ratio6_icon_',      x = t_pos.p2_teammenu_pos[1] + t_pos.p2_teammenu_item_offset[1], y = t_pos.p2_teammenu_pos[2] + t_pos.p2_teammenu_item_offset[2]},
 	{s = 'p2_teammenu_ratio7_icon_',      x = t_pos.p2_teammenu_pos[1] + t_pos.p2_teammenu_item_offset[1], y = t_pos.p2_teammenu_pos[2] + t_pos.p2_teammenu_item_offset[2]},
+	{s = 'p2_palmenu_bg_',                x = t_pos.p2_palmenu_bg_pos[1],                                  y = t_pos.p2_palmenu_bg_pos[2]},
 	{s = 'stage_portrait_random_',        x = t_pos.stage_pos[1],                                          y = t_pos.stage_pos[2]},
 	{s = 'stage_portrait_bg_',            x = t_pos.stage_pos[1],                                          y = t_pos.stage_pos[2]},
 }) do

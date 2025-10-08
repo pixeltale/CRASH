@@ -101,7 +101,7 @@ velset = 0,0
 type = DisplayToClipboard
 trigger1 = 1
 text = "camerapos x = %0.1f ES SELECTED = %f"
-params = camerapos x, map(ES_SELECT)
+params = pos x, map(ES_SELECT)
 
 [State 0, Jump Cancel] ;Fireball
 type 		= MapAdd

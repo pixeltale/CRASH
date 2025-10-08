@@ -138,6 +138,7 @@ options.t_itemname = {
 			modifyGameOption('Options.Time', 99)
 			modifyGameOption('Options.GameSpeed', 0)
 			modifyGameOption('Options.Match.Wins', 2)
+			--modifyGameOption('Options.GameSpeedStep', 5)
 			modifyGameOption('Options.Match.MaxDrawGames', -2) -- -2: match.maxdrawgames
 			modifyGameOption('Options.Credits', 10)
 			modifyGameOption('Options.QuickContinue', false)
@@ -179,7 +180,8 @@ options.t_itemname = {
 			modifyGameOption('Config.AfterImageMax', 128)
 			modifyGameOption('Config.ExplodMax', 512)
 			modifyGameOption('Config.HelperMax', 56)
-			modifyGameOption('Config.PlayerProjectileMax', 256)
+			modifyGameOption('Config.ProjectileMax', 256)
+			modifyGameOption('Config.PaletteMax', 100)
 			--modifyGameOption('Config.ZoomActive', true)
 			--modifyGameOption('Config.EscOpensMenu', true)
 			--modifyGameOption('Config.BackgroundLoading', false) --TODO: not implemented
@@ -920,7 +922,7 @@ options.t_itemname = {
 			else
 				modifyGameOption('Video.WindowScaleMode', true)
 			end
-			t.items[item].vardisplay = options.f_boolDisplay(gameOption('Video.WindowScaleMode'), motif.option_info.menu_valuename_enabled, motif.option_info.menu_valuename_disabled)
+			t.items[item].vardisplay = options.t_vardisplay['windowscalemode']()
 			options.modified = true
 		end
 		return true
@@ -1202,17 +1204,17 @@ options.t_itemname = {
 		end
 		return true
 	end,
-	--PlayerProjectileMax
+	--ProjectileMax
 	['projectilemax'] = function(t, item, cursorPosY, moveTxt)
 		if main.f_input(main.t_players, {'$F'}) then
 			sndPlay(motif.files.snd_data, motif.option_info.cursor_move_snd[1], motif.option_info.cursor_move_snd[2])
-			modifyGameOption('Config.PlayerProjectileMax', gameOption('Config.PlayerProjectileMax') + 1)
-			t.items[item].vardisplay = gameOption('Config.PlayerProjectileMax')
+			modifyGameOption('Config.ProjectileMax', gameOption('Config.ProjectileMax') + 1)
+			t.items[item].vardisplay = gameOption('Config.ProjectileMax')
 			options.modified = true
-		elseif main.f_input(main.t_players, {'$B'}) and gameOption('Config.PlayerProjectileMax') > 1 then
+		elseif main.f_input(main.t_players, {'$B'}) and gameOption('Config.ProjectileMax') > 1 then
 			sndPlay(motif.files.snd_data, motif.option_info.cursor_move_snd[1], motif.option_info.cursor_move_snd[2])
-			modifyGameOption('Config.PlayerProjectileMax', gameOption('Config.PlayerProjectileMax') - 1)
-			t.items[item].vardisplay = gameOption('Config.PlayerProjectileMax')
+			modifyGameOption('Config.ProjectileMax', gameOption('Config.ProjectileMax') - 1)
+			t.items[item].vardisplay = gameOption('Config.ProjectileMax')
 			options.modified = true
 		end
 		return true
@@ -1245,6 +1247,22 @@ options.t_itemname = {
 			t.items[item].vardisplay = gameOption('Config.AfterImageMax')
 			options.modified = true
 		end
+		return true
+	end,
+	--PaletteMax
+	['palettemax'] = function(t, item, cursorPosY, moveTxt)
+		if main.f_input(main.t_players, {'$F'}) then
+			sndPlay(motif.files.snd_data, motif.option_info.cursor_move_snd[1], motif.option_info.cursor_move_snd[2])
+			modifyGameOption('Config.PaletteMax', gameOption('Config.PaletteMax') + 1)
+			t.items[item].vardisplay = gameOption('Config.PaletteMax')
+			options.modified = true
+		elseif main.f_input(main.t_players, {'$B'}) and gameOption('Config.PaletteMax') > 1 then
+			sndPlay(motif.files.snd_data, motif.option_info.cursor_move_snd[1], motif.option_info.cursor_move_snd[2])
+			modifyGameOption('Config.PaletteMax', gameOption('Config.PaletteMax') - 1)
+			t.items[item].vardisplay = gameOption('Config.PaletteMax')
+			options.modified = true
+		end
+		options.needReload = true
 		return true
 	end,
 	--Save and Return
@@ -1291,6 +1309,7 @@ function options.f_createMenu(tbl, bool_main)
 		local moveTxt = 0
 		local item = 1
 		local t = tbl.items
+		main.f_menuSnap('option_info')
 		if bool_main then
 			main.f_bgReset(motif.optionbgdef.bg)
 			main.f_fadeReset('fadein', motif.option_info)
@@ -1337,6 +1356,7 @@ function options.f_createMenu(tbl, bool_main)
 				if tbl.submenu[f].loop ~= nil then
 					sndPlay(motif.files.snd_data, motif.option_info.cursor_done_snd[1], motif.option_info.cursor_done_snd[2])
 					tbl.submenu[f].loop()
+					main.f_menuSnap('option_info')
 				elseif not options.t_itemname[f](tbl, item, cursorPosY, moveTxt) then
 					break
 				end
@@ -1450,6 +1470,9 @@ options.t_vardisplay = {
 	['msaa'] = function()
 		return options.f_definedDisplay(gameOption('Video.MSAA'), {[0] = motif.option_info.menu_valuename_disabled}, gameOption('Video.MSAA') .. 'x')
 	end,
+	['palettemax'] = function()
+		return gameOption('Config.PaletteMax')
+	end,
 	['panningrange'] = function()
 		return gameOption('Sound.PanningRange') .. '%'
 	end,
@@ -1460,7 +1483,7 @@ options.t_vardisplay = {
 		return gameOption('Netplay.ListenPort')
 	end,
 	['projectilemax'] = function()
-		return gameOption('Config.PlayerProjectileMax')
+		return gameOption('Config.ProjectileMax')
 	end,
 	['quickcontinue'] = function()
 		return options.f_boolDisplay(gameOption('Options.QuickContinue'))
@@ -1550,7 +1573,7 @@ options.t_vardisplay = {
 		return options.f_definedDisplay(gameOption('Video.VSync'), {[1] = motif.option_info.menu_valuename_enabled}, motif.option_info.menu_valuename_disabled)
 	end,
 	['windowscalemode'] = function()
-		return options.f_boolDisplay(gameOption('Video.WindowScaleMode'), motif.option_info.menu_valuename_enabled, motif.option_info.menu_valuename_disabled)
+		return options.f_boolDisplay(gameOption('Video.WindowScaleMode'), "Bilinear", "Nearest")
 	end,
 }
 
