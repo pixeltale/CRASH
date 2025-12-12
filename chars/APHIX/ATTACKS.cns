@@ -462,8 +462,19 @@ facep2 		= 1
 poweradd 	= 0
 sprpriority 	= 2
 
+[State 40, 1]
+type = VarSet
+trigger1 = command != "holdback"
+sysvar(1) = 0
+[State 40, 3]
+type = VarSet
+trigger1 = command = "holdback"
+sysvar(1) = 1
+
 [State 0, VelSet]
 type = VelSet
+triggerall = !sysvar(1)
+triggerall = animelemno(0) < 7 && animelemno(0) > 1
 trigger1 = map(EMPOWER)
 x = cond(abs(p2dist x) * 0.05 < 5, p2dist x * 0.05, 5)
 y = cond(abs(p2dist y) * 0.05 < 5, p2dist y * 0.05, 5)
@@ -477,6 +488,7 @@ ignorehitpause = 1
 
 [State 200, 3]
 type = ChangeAnim
+triggerall = time < 20
 triggerall = movecontact
 triggerall = command = "HOLD_SPECIAL"
 trigger1 = AnimElem = 7
@@ -563,18 +575,11 @@ envshake.phase 	= 1
 p2stateno 	= 5220
 p2getp1state 	= 0
 
-[State 0, Jump Cancel]
-type 		= MapSet
-trigger1 		= animelemno(-1) >= 4
-map 			= "EVA_WhiffCancel"
-value 		= 10
-ignorehitpause = 1
-
 [State 200, 3]
 type = ChangeState
 trigger1 = movecontact && anim = 1001
 trigger1 = command = "66"
-value = 60
+value = 160
 ctrl = 1
 [State 200, 3]
 type = ChangeState
@@ -761,6 +766,13 @@ facep2 		= 1
 poweradd 		= 0
 sprpriority 	= 2
 
+[State 0, Jump Cancel]
+type 		= MapSet
+trigger1 		= animelemno(0) >= 3
+map 			= "EVA_WhiffCancel"
+value 		= 10
+ignorehitpause = 1
+
 [State 0, Cheaper Town Hall]
 type 		= MapSet
 trigger1 		= animelem = 3
@@ -840,8 +852,8 @@ down.hittime 		= 15
 guard.ctrltime 	= 25
 guard.slidetime	= 25
 airguard.velocity 	= -5, -5
-ground.velocity 	= -8, -8
-air.velocity 		= -8, -6
+ground.velocity 	= -10, -8
+air.velocity 		= -10, -6
 envshake.time 		= 0
 fall 			= 1
 air.fall 			= 1

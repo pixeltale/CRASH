@@ -71,7 +71,7 @@ name = "holddown"
 command = /$D
 time = 1
 buffer.time = 1
-buffer.hitpause = 1
+buffer.hitpause = 0
 buffer.pauseend = 0
 
 ; Every common command below this point is deprecated.

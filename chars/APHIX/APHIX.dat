@@ -2,42 +2,37 @@
 
 	<#190bd9>UNIQUE MOVES</>
 DOUBLE JAB	-		^A > ^A
-WRIST FLICK -     _F^a
-   <#bbbbbb>An upward attack that restands opponents.</>
+TETSUZANKOU -     _F^a
+   <#bbbbbb>A shoulder with upperbody invulnerability.</>
 
 
 	<#190bd9>SPECIAL MOVES</>
-DICER	-		^B
-   <#bbbbbb>A simple projectile attack.</>
-COP KILLER	-		_F^B
-   <#bbbbbb>A flying knee with a followup that knocks down.</>
-_!FOR FUN!	-		^B
-RAZORWIRE	-		_B^B
-   <#bbbbbb>Gash pulls in the opponent with a plus on block,
-side-switching attack that forces a restand on hit.</>
-LOITER SHOT	-		_D^B 
-   <#bbbbbb>A strong launching kick that is invincible
-against airborne attacks. Can be jump canceled.</>
+THOUSAND POINT STRIKE (HOLD/MASH/AIR OK)	-		^B
+   <#bbbbbb>A multipunch attack. HOLD/MASH OK. Tracks to the opponent when EMPOWERED.</>
+_!SOUL SEEKER	-		^A
+   <#bbbbbb>A dash cancelable followup palm that can only be done when EMPOWERED.</>
+Devil Slicing Kick	-		_F^B
+   <#bbbbbb>A flying kick that can be done in any direction.</>
+LOTUS WHIP	-		_B^B
+   <#bbbbbb>Big punch, big hitbox. Doesnt have armor yet cuz lazy.</>
+EMPOWER	-		_D^B 
+   <#bbbbbb>Gives Aphix the EMPOWERED state.</>
 
-<#190bd9>EXTRA SPECIAL MOVES (3 Break Points)</>
-FLAMAGRA BURNOUT	-		^A + ^B
-   <#bbbbbb>A massive eruption that launches the opponent a good distance.
-   Its long range makes it a strong punish option, but it has no invulnerability.</>
-FLYING GUILLOTINE (AIR OK)	-		^A + ^B
-   <#bbbbbb>A powerful version of the DICER projectile. Not as much knockback as Flamagra Burnout,
-   But it has invulnerability and can be used in midair.</>
+<#190bd9>EXTRA SPECIAL MOVES (2 Break Points)</>
+ONE-INCH PUNCH	-		^A + ^B
+   <#bbbbbb>An invincible, short ranged attack.</>
+Second ES not implemented yet
 
 <#190bd9>ULTIMATE (5 Break Points)</>
-ALL-SLAUGHTER -		^Z
-   <#bbbbbb>Gash kicks the opponent into the air before following up with a powerful launching attack.</>
+Not Implemented
 
 	SYSTEM MECHANICS
 SUPERJUMP	-		_D_U
-   <#bbbbbb>Jump higher, faster, and further. Increases your air
-   drift.</>   
+   <#bbbbbb>Aphix Cannot Superjump.</>   
 EVADE	-		_F^C or _B^C
-   <#bbbbbb>An invincible dodge forward or backward. Can be canceled
-into for 1 Break Point.</>
+   <#bbbbbb>As opposed to a traditional Evade, on the ground, Aphix can parry.
+   In midair, she has a wall-run that has no invul, but she can block out of it
+   and it has no minimum height restriction.</>
 EXTRA SPECIAL	-		^A+^B
    <#bbbbbb>A powerful attack that costs 3 Break Points to perform. Can
    be used to KO the opponent in the corner. Extra Specials, or ES moves 

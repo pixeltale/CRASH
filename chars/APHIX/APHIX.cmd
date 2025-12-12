@@ -94,6 +94,35 @@ trigger2 = movecontact && hitdefattr = A, NA
 trigger3 =  stateno=45 || stateno=46|| stateno=50
 trigger3 = vel y>.1
 
+;Evade Forward
+[State -1, Airdash]
+type = ChangeState
+value = 65
+triggerall = command != "holdback"
+triggerall = stateno != 71 && command = "EVADE" || stateno = 71 && command = "EVADE_NOBUFFER"
+triggerall = stateno != [65,66] && command = "EVADE" || stateno = [65,66] && command = "EVADE_NOBUFFER"
+triggerall = statetype != A && stateno != 65
+trigger1 = map(EvaCancel) > 0 && map(BreakPoints) >= 1 || stateno = 71
+
+;Evade Back
+[State -1, Airdash]
+type = ChangeState
+value = 66
+triggerall = command = "holdback"
+triggerall = stateno != 71 && command = "EVADE" || stateno = 71 && command = "EVADE_NOBUFFER"
+triggerall = stateno != [65,66] && command = "EVADE" || stateno = [65,66] && command = "EVADE_NOBUFFER"
+triggerall = statetype != A && stateno != 66
+trigger1 = map(EvaCancel) > 0 && map(BreakPoints) >= 1 || stateno = 71
+
+;PARRY
+[State -1, Airdash]
+type = ChangeState
+value = 70
+triggerall = stateno != [65,66] && command = "EVADE" || stateno = [65,66] && command = "EVADE_NOBUFFER"
+triggerall = statetype != A && !(stateno = [65, 66] && time < 3)
+trigger1 = ctrl
+
+
 ;Dash
 [State -1, Run Fwd]
 type = ChangeState

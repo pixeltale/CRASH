@@ -2195,15 +2195,6 @@ map 		= "ScratchLockout"
 value 		= 70
 ignorehitpause 	= 1
 
-[State 0, PalFXWiz]
-type = PalFX
-trigger1 = time = 0
-time = 15
-add = 50,50,50
-mul = 256,256,256
-sinadd = 10,10,10,10
-invertall = 0
-color = 256
 
 [State 0, NotHitBy]
 type = NotHitBy
@@ -2702,15 +2693,6 @@ type = SelfState
 triggerall = !alive
 trigger1 = (Vel y >= 0) && (Pos y >= 0)
 value = 5100
-
-[State 0, PalFX]
-type = PalFX
-trigger1 = vel x < -2
-time = 2
-add = 100, 0,20
-mul = 256,256,256
-invertall = 0
-color = 256
 
 [State 5030, 6]
 type = ChangeState
@@ -5600,7 +5582,7 @@ value = 60
 triggerall = command != "holdback" && command != "holddown"
 triggerall = command = "EVADE_NOBUFFER"
 triggerall = statetype = A
-triggerall = pos y<-30 || vel y > 0
+triggerall = (pos y<-30 || vel y > 0) || name = "APHIX"
 trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && map(BreakPoints) >= 1
 
 ;Air Evade Back
@@ -5610,7 +5592,7 @@ value = 61
 triggerall = command = "holdback"
 triggerall = command = "EVADE_NOBUFFER"
 triggerall = statetype = A
-triggerall = pos y<-30 || vel y > 0
+triggerall = (pos y<-30 || vel y > 0) || name = "APHIX"
 trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && map(BreakPoints) >= 1
 
 
@@ -5618,6 +5600,7 @@ trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && ma
 [State -1, Airdash]
 type = ChangeState
 value = 65
+triggerall = name != "APHIX"
 triggerall = command != "holdback"
 triggerall = stateno != 66 && command = "EVADE" || stateno = 66 && command = "EVADE_NOBUFFER"
 triggerall = statetype != A && stateno != 65
@@ -5627,6 +5610,7 @@ trigger1 = ctrl || map(EvaCancel) > 0 && map(BreakPoints) >= 1 || stateno = [65,
 [State -1, Airdash]
 type = ChangeState
 value = 66
+triggerall = name != "APHIX"
 triggerall = command = "holdback"
 triggerall = stateno != 65 && command = "EVADE" || stateno = 65 && command = "EVADE_NOBUFFER"
 triggerall = statetype != A && stateno != 66
