@@ -1,0 +1,583 @@
+; Air Evade
+[Statedef 60]
+type    = A
+physics = A
+anim = 60
+sprpriority = 1
+ctrl = 0
+velset = 0, 0
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = !time
+sysvar(1) = prevstateno = [200,1030]
+[State 0, EVA Cancel]
+type 		= MapAdd
+triggerall	= !TIME
+trigger1 		= sysvar(1)
+map 			= "BreakPoints"
+value 		= -1
+ignorehitpause = 1
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = time < 10
+time = 1
+add = 0, 0, 100
+mul = 256,256,256
+invertall = 0
+color = 256
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time < 10
+value = ,NA,SA,HA,NP,SP,HP
+time = 1
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = time <= 20
+flag = noairguard
+
+[State 100, 1]
+type = VelSet
+trigger1 = time < 20
+x = 5
+y = -1
+
+[State - Air Option Limiter - Airdash]
+type = mapadd
+triggerall = !sysvar(1)
+trigger1 = time = 0
+map = "AirActions"
+value = 1
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = prevstateno = [200,1030]
+trigger1 = time = 4
+value = 1
+[State 0, CtrlSet]
+type = ChangeState
+trigger1 = time = 20
+value = 50
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; Air Evade Back
+[Statedef 61]
+type    = A
+physics = A
+anim = 61
+sprpriority = 1
+ctrl = 0
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = !time
+sysvar(1) = prevstateno = [200,1030]
+[State 0, EVA Cancel]
+type 		= MapAdd
+triggerall	= !TIME
+trigger1 		= sysvar(1)
+map 			= "BreakPoints"
+value 		= -1
+ignorehitpause = 1
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = time < 10
+time = 1
+add = 0, 0, 100
+mul = 256,256,256
+invertall = 0
+color = 256
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time < 10
+value = ,NA,SA,HA,NP,SP,HP
+time = 1
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = time <= 20
+flag = noairguard
+
+[State 100, 1]
+type = VelSet
+trigger1 = time = 0
+x = -5.5
+
+[State - Air Option Limiter - Airdash]
+type = mapadd
+triggerall = !sysvar(1)
+trigger1 = time = 0
+map = "AirActions"
+value = 1
+[State - Airdash Momentum Preserve]
+type = mapset
+trigger1 = time < 15
+map = "ADM" ;AirDash Momentum Preserve
+value = 1
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = prevstateno = [200,1030]
+trigger1 = time = 4
+value = 1
+[State 0, CtrlSet]
+type = ChangeState
+trigger1 = time = 20
+value = 50
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; Air Evade Down
+[Statedef 62]
+type    = A
+physics = A
+anim = 60
+sprpriority = 1
+ctrl = 0
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = !time
+sysvar(1) = prevstateno = [200,1030]
+[State 0, EVA Cancel]
+type 		= MapAdd
+triggerall	= !TIME
+trigger1 		= sysvar(1)
+map 			= "BreakPoints"
+value 		= -1
+ignorehitpause = 1
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = time < 10
+time = 1
+add = 0, 0, 100
+mul = 256,256,256
+invertall = 0
+color = 256
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time < 10
+value = ,NA,SA,HA,NP,SP,HP
+time = 1
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = time <= 20
+flag = noairguard
+
+[State 100, 1]
+type = VelSet
+trigger1 = time = 0
+x = 0 ;cond(command = "holdback", -7, cond(command = "holdfwd", 7, 0))
+y = 6.5
+
+[State - Air Option Limiter - Airdash]
+type = mapadd
+triggerall = !sysvar(1)
+trigger1 = time = 0
+map = "AirActions"
+value = 1
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = prevstateno = [200,1030]
+trigger1 = time = 4
+value = 1
+[State 0, CtrlSet]
+type = ChangeState
+trigger1 = time = 20
+value = 50
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; Ground Evade
+[Statedef 65]
+type    = S
+physics = S
+anim = 65
+sprpriority = 1
+velset = 5
+ctrl = 0
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = !time
+sysvar(1) = prevstateno = [200,1030]
+
+[State 0, PlayerPush]
+type = PlayerPush
+triggerall = time < 10
+trigger1 = !sysvar(1)
+value = 0
+
+[State 0, EVA Cancel]
+type 		= MapAdd
+triggerall	= !TIME
+trigger1 		= sysvar(1)
+map 			= "BreakPoints"
+value 		= -1
+ignorehitpause = 1
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = time < 10
+time = 1
+add = 0, 0, 100
+mul = 256,256,256
+invertall = 0
+color = 256
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time < 10
+value = ,NP,SP,HP
+time = 1
+[State 100, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+flag2 = NoAutoTurn
+
+[State 100, 1]
+type = VelSet
+trigger1 = time < 10
+x = 9
+[State 100, 1]
+type = VelMul
+trigger1 = time = 11
+x = 0.6
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = sysvar(1)
+value = 1
+[State 100, 4]
+type = ChangeState
+trigger1 = time = 15
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;Ground Evade Back
+[Statedef 66]
+type    = S
+physics = S
+ctrl = 0
+anim = 66
+sprpriority = 1
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = !time
+sysvar(1) = prevstateno = [200,1030]
+
+[State 0, PlayerPush]
+type = PlayerPush
+triggerall = time < 10
+trigger1 = !sysvar(1)
+value = 0
+
+[State 0, EVA Cancel]
+type 		= MapAdd
+triggerall	= !TIME
+trigger1 		= sysvar(1)
+map 			= "BreakPoints"
+value 		= -1
+ignorehitpause = 1
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = time < 10
+time = 1
+add = 0, 0, 100
+mul = 256,256,256
+invertall = 0
+color = 256
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time < 10
+value = ,NP,SP,HP
+time = 1
+[State 100, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+flag2 = NoAutoTurn
+
+[State 100, 1]
+type = VelSet
+trigger1 = time < 10
+x = -7.5
+[State 100, 1]
+type = VelMul
+trigger1 = time = 11
+x = 0.6
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = sysvar(1)
+value = 1
+[State 100, 4]
+type = ChangeState
+trigger1 = time = 20
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; PURSUIT (After Launch)
+[Statedef 99]
+type    = S
+physics = S
+sprpriority = 1
+velset = 5, 0
+ctrl = 0
+
+[State 1030, Full Invulnerability]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+ignorehitpause = 1
+persistent = 1
+
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = !time
+x = -100
+[State 0, PosSet]
+type = PosSet
+trigger1 = 1
+y = 0
+
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = enemy, stateno != [5300, 5301]
+value = 100
+
+[State 0, PosFreeze]
+type = PosFreeze
+trigger1 = enemy, stateno = [5300, 5301]
+value = 1
+
+[State 0, ScreenBound]
+type = ScreenBound
+trigger1 = 1
+value = 0
+movecamera = 0,0
+
+[State 99, 1]
+type = VelAdd
+trigger1 = 1
+x = 2.5
+
+[State 99, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+flag2 = NoAutoTurn
+
+[State 99, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = time < 5 || backedgebodydist < -15
+flag = Invisible
+
+[State 99, 3]
+type 	= ChangeState
+trigger1 		= BackEdgeBodyDist > 0
+value 		= 100
+ctrl 		= 1
+
+;---------------------------------------------------------------------------
+; Dash F
+[Statedef 100]
+type    = S
+physics = S
+anim = 100
+sprpriority = 1
+velset = 5
+ctrl = 1
+
+[State 0, VelSet]
+type = Velset
+trigger1 = !time
+x = 15
+[State 100, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+
+[State 100, 3] ;Prevent from turning
+type = AssertSpecial
+trigger1 = 1
+flag = NoAutoTurn
+
+[State 100, 4]
+type = ChangeState
+trigger1 = !animtime
+value = 0
+ctrl = 1
+
+
+
+;---------------------------------------------------------------------------
+;Backdash
+[Statedef 105]
+type    = S
+physics = S
+ctrl = 1
+anim = 105
+sprpriority = 1
+
+[State 100, 1]
+type = VelSet
+trigger1 = !time
+x = -10
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time =13
+x = -3
+y = 0
+
+[State 100, 2] ;Prevent run from canceling into walk
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+
+[State 100, 3] ;Prevent from turning
+type = AssertSpecial
+trigger1 = 1
+flag = NoAutoTurn
+
+[State 100, 4]
+type = ChangeState
+trigger1 = animtime = 0
+value = 11
+ctrl = 1
+
+
+;---------------------------------------------------------------------------
+; Forbidden Superdash Code
+[Statedef 159]
+type    = A
+physics = N
+anim = 60
+sprpriority = 1
+ctrl = 0
+velset = -5, -5
+facep2 = 1
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = !time
+sysvar(1) = prevstateno = [200,1030]
+[State 0, EVA Cancel]
+type 		= MapAdd
+triggerall	= !TIME
+trigger1 		= sysvar(1)
+map 			= "BreakPoints"
+value 		= -1
+ignorehitpause = 1
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = time < 10
+time = 1
+add = 0, 0, 100
+mul = 256,256,256
+invertall = 0
+color = 256
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time < 10
+value = ,NA,SA,HA,NP,SP,HP
+time = 1
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = time <= 20
+flag = noairguard
+
+[State ホーミング目標点]
+Type = Helper
+Trigger1 = NumHelper(160) = 0
+StateNo 		= 160
+ID 			= 160
+name 		= "Homing Dash Helper"
+PosType 		= P1
+SuperMoveTime 	= 999999999999
+PauseMoveTime 	= 999999999999
+IgnoreHitPause = 1
+Persistent 	= 0
+
+[State Accel]
+type = VelAdd
+trigger1 = animelemno(0) > 2
+x = abs(pos x - (helper(160), pos x)) * 0.05
+
+[State Accel]
+type = VelSet
+trigger1 = animelemno(0) > 2
+y = -(pos y - (helper(160), pos y)) * 0.05
+[State Accel]
+type = VelSet
+trigger1 = vel x > 10
+x = 10
+
+[State - Air Option Limiter - Airdash]
+type = mapadd
+triggerall = !sysvar(1)
+trigger1 = time = 0
+map = "AirActions"
+value = 1
+[State - Airdash Momentum Preserve]
+type = mapset
+trigger1 = time < 15
+map = "ADM" ;AirDash Momentum Preserve
+value = 1
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = prevstateno = [200,1030]
+trigger1 = time = 4
+value = 1
+[State 0, CtrlSet]
+type = ChangeState
+trigger1 = time = 90 || p2dist x < -5
+value = 50
+ctrl = 1
+[State 0, CtrlSet]
+type = ChangeState
+trigger1 = pos y >= 0
+value = 0
+ctrl = 1
+;Homing Dash Target Helper
+[Statedef 160]
+type    = A
+physics = N
+anim = -1
+sprpriority = 1
+ctrl = 0
+velset = 0, 0
+facep2 = 1
+
+[State 親→子の角度]
+type = VarSet
+trigger1 = 1
+fvar(3) = (atan(var(25)/(var(26)+0.0001))*180/Pi)-(90*ifelse((var(26))<0,-1,1))
+
+[State 0, PosAdd]
+type = PosSet
+trigger1 = 1
+x = enemy, pos x
+y = enemy, pos y - 20 -(cond(root, command = "holdup", 40, cond(root, command = "holddown", -40, 0)))
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = root, stateno != 60

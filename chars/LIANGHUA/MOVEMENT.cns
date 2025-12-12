@@ -42,7 +42,7 @@ flag = noairguard
 [State 100, 1]
 type = VelSet
 trigger1 = time = 0
-x = 2.5 + (map(nibble) * 2)
+x = 7
 
 [State - Air Option Limiter - Airdash]
 type = mapadd
@@ -110,7 +110,7 @@ flag = noairguard
 [State 100, 1]
 type = VelSet
 trigger1 = time = 0
-x = -2.5 - map(nibble) + 1
+x = -5
 
 [State - Air Option Limiter - Airdash]
 type = mapadd
@@ -134,6 +134,71 @@ type = ChangeState
 trigger1 = time = 20
 value = 50
 ctrl = 1
+
+;---------------------------------------------------------------------------
+; Air Evade Down
+[Statedef 62]
+type    = A
+physics = A
+anim = 60
+sprpriority = 1
+ctrl = 0
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = !time
+sysvar(1) = prevstateno = [200,1030]
+[State 0, EVA Cancel]
+type 		= MapAdd
+triggerall	= !TIME
+trigger1 		= sysvar(1)
+map 			= "BreakPoints"
+value 		= -1
+ignorehitpause = 1
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = time < 10
+time = 1
+add = 0, 0, 100
+mul = 256,256,256
+invertall = 0
+color = 256
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time < 10
+value = ,NA,SA,HA,NP,SP,HP
+time = 1
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = time <= 20
+flag = noairguard
+
+[State 100, 1]
+type = VelSet
+trigger1 = time = 0
+x = 0 ;cond(command = "holdback", -7, cond(command = "holdfwd", 7, 0))
+y = 6.5
+
+[State - Air Option Limiter - Airdash]
+type = mapadd
+triggerall = !sysvar(1)
+trigger1 = time = 0
+map = "AirActions"
+value = 1
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = prevstateno = [200,1030]
+trigger1 = time = 4
+value = 1
+[State 0, CtrlSet]
+type = ChangeState
+trigger1 = time = 20
+value = 50
+ctrl = 1
+
 
 ;---------------------------------------------------------------------------
 ; Ground Evade
@@ -342,7 +407,7 @@ ctrl = 1
 [State 0, VelSet]
 type = VelAdd
 trigger1 = time % 2
-x = 1 + (map(nibble) * 0.3)
+x = 3
 [State 100, 2] ;Prevent run from canceling into walk
 type = AssertSpecial
 trigger1 = 1

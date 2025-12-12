@@ -5,8 +5,8 @@
 
 ; ----------------------------------------------------------
 [Info]
-name = "Training Stage Z"           ; Internal name of the stage.
-displayName = "Training Stage Z"    ; Name to display on the select screen.
+name = "DEFAULT STAGE"           ; Internal name of the stage.
+displayName = "DEFAULT STAGE"    ; Name to display on the select screen.
 versionDate = 2025.03.07            ; Version / Date of stage.
 ikemenVersion = 1.0                 ; Version of Ikemen GO the stage is made for
 author = "Phantom.of.the.Server"    ; Stage author name.

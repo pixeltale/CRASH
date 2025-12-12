@@ -93,18 +93,18 @@ trigger2 = ctrl
 
 ;Double Jump Raw
 [State -1,DJC]
-type 	= ChangeState
-value 	= 1050
-triggerall = statetype = A && map(Float) < 1
-triggerall = command = "up" && map(doubleJump_BUFFFIX) < 2 
+type = ChangeState
+value = 45
+triggerall = statetype = A && map(AirActions) < const(AirActionMax)
+triggerall = command = "up" && map(doubleJump_BUFFFIX) < 2
 trigger1 = ctrl
 [State -1,DJC]
-type 	= ChangeState
-value 	= 1050
+type = ChangeState
+value = 45
 triggerall = movecontact && command = "holdup"
-triggerall = statetype = A  && map(Float) < 1
-trigger1 = ctrl && stateno != 1040 
-trigger2 = movecontact && hitdefattr = A, NA, SA
+triggerall = statetype = A && map(AirActions) < const(AirActionMax)
+trigger1 = ctrl && stateno!= [40,55] && !(stateno = 56 && time < 20)
+trigger2 = movecontact && hitdefattr = A, NA
 trigger3 =  stateno=45 || stateno=46|| stateno=50
 trigger3 = vel y>.1
 

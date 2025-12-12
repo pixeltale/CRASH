@@ -136,16 +136,8 @@ trigger1 = animelem = 2 || animelem = 3
 x = 15
 [State 0, VelAdd]
 type = PosAdd
-trigger1 = animelem = 4
-x = 30
-[State 0, VelAdd]
-type = PosAdd
 trigger1 = animelem = 7
 x = -5
-[State 0, VelAdd]
-type = PosAdd
-trigger1 = animelem = 8
-x = -30
 
 [State 200, 3]
 type = ChangeState
@@ -896,7 +888,7 @@ fall.yvelocity 	= 0
 air.velocity 		= -1,18
 down.velocity 		= 0,16
 guard.slidetime 	= 18
-guard.ctrltime 	= 18 + (map(nibble) * 3)
+guard.ctrltime 	= 22
 air.fall 			= 1
 fall 			= 1
 p2stateno 		= 5255
@@ -906,7 +898,6 @@ getpower 			= 0
 
 [State 0, Explod]
 type = Explod
-trigger1 = map(nibble)  >= 2
 trigger1 = animelem = 5 && !numexplod(1031)
 anim = 1031
 ID = 1031
@@ -919,7 +910,6 @@ sprPriority = 10
 removeonchangestate = 1
 [State 0, Custom Afterimage]
 type = Explod
-triggerall = map(nibble) >= 1
 trigger1 = time%5=0
 anim = anim
 animelem = animelemno(0)
@@ -1066,17 +1056,12 @@ ctrl 	= 1
 type    		= A
 movetype		= A
 physics 		= a
-velset 		= VEL X * 0.5, vel y
+velset 		= VEL X, vel y
 ctrl 		= 0
 anim 		= 1040
 facep2 		= 1
 poweradd 		= 0
 sprpriority 	= 2
-
-[State 0, PosAdd]
-type = VelAdd
-trigger1 = animelem = 2
-x = 1
 
 
 [State 1030, 1] ;++++++++++++++++++++++++++++++++++

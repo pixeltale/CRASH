@@ -143,7 +143,7 @@ name = "ATTACK"
 command = a
 time = 1
 buffer.time = 5
-buffer.hitpause = 1
+buffer.hitpause = 0
 buffer.pauseend = 1
 
 [Command]
@@ -196,6 +196,14 @@ buffer.pauseend = 1
 [Command]
 name = "ULTIMATE"
 command = z
+time = 1
+buffer.time = 5
+buffer.hitpause = 1
+buffer.pauseend = 1
+
+[Command]
+name = "ULTIMATE"
+command = a + b + c
 time = 1
 buffer.time = 5
 buffer.hitpause = 1

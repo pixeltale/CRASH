@@ -71,7 +71,7 @@ down.friction.threshold = .05         ;If the player's speed drops below this th
 
 [Constants]
 ; NegativeStates.cns states
-AirActionMax = 1
+AirActionMax = 2
 SuperjumpHeight = -11
 THROW.DIST = 80
 AIRTHROW.DISTX = 80

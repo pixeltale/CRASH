@@ -10,20 +10,6 @@
 ;                    Used by state 5100 and 5111 to remember downward
 ;                    velocity of player just before hitting the ground.
 ;                    Used in state 5080 for storing the anim # to display.
-
-; The following states have special handling within MUGEN, and should be
-; overridden with caution:
-; Jump Start (40): airjumping bookkeeping at time = 0
-; All guard states (120-155): guard handling throughout state
-; Hit_trip, shaking (5070): defense increases at time = 0
-; Downed get-hit (hit ground from fall) (5100):
-;   defense increases at time = 0, player becomes invincible if within 10
-;   ticks of getting up
-; Hit_liedown (5111): player changes to get-up state (5120) when ready
-; Hit_getup (5120): player's defence is restored to normal at time = 0
-; Hitfall_recover (5200): player's defence is restored at time = 0
-; Hitfall_airrecover (5210): player's defence is restored at time = 0
-
 ;---------------------------------------------------------------------------
 ; Stand
 [Statedef 0]
@@ -180,7 +166,7 @@ y = const(velocity.jump.y)
 type = VelSet
 triggerall = sysvar(1) = -1
 trigger1 = animtime = 0
-x = const(velocity.jump.back.x) + (vel x * 0.65)
+x = const(velocity.jump.back.x) + (vel x * 0.15)
 y = const(velocity.jump.y)
 
 [State 40, 6]
@@ -205,12 +191,12 @@ value = 1
 
 [State 45, 1]
 type = ChangeAnim
-trigger1 = SelfAnimExist(44)
-value = 44
+trigger1 = SelfAnimExist(45)
+value = 45
 
 [State 45, 2]
 type = ChangeAnim
-trigger1 = !SelfAnimExist(44)
+trigger1 = !SelfAnimExist(45)
 value = 41
 
 [State 45, 3]
@@ -231,7 +217,7 @@ sysvar(1) = -1
 [State 45, 6]
 type = VelSet
 trigger1 = Time = 2
-x = ifelse(sysvar(1)=0, const(velocity.airjump.neu.x), ifelse(sysvar(1)=1, const(velocity.airjump.fwd.x), const(velocity.airjump.back.x)))
+x = vel x + ifelse(sysvar(1)=0, const(velocity.airjump.neu.x), ifelse(sysvar(1)=1, const(velocity.airjump.fwd.x), const(velocity.airjump.back.x)))
 y = const(velocity.airjump.y)
 
 [State 45, 7]
@@ -3483,7 +3469,7 @@ value = 1
 type = NotHitBy
 trigger1 = AnimTime = 0
 value = , NT,ST,HT
-time = 12
+time = 3
 ignorehitpause = 1
 
 [State 5120, 6] ;Can't be hit right after getting up (short time)
@@ -5596,12 +5582,23 @@ value = 0
 ;===========================================================================
 ;------------------- EVADE AND EVA CANCEL ----------------------------------
 ;===========================================================================
+
+;Air Evade Down
+[State -1, Airdash]
+type = ChangeState
+value = 62
+triggerall = name = "LIANGHUA"
+triggerall = command = "holddown"
+triggerall = command = "EVADE_NOBUFFER"
+triggerall = statetype = A
+triggerall = pos y<-20 || vel y > 0
+trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && map(BreakPoints) >= 1
 ;Air Evade Forward
 [State -1, Airdash]
 type = ChangeState
 value = 60
-triggerall = command != "holdback"
-triggerall = command = "EVADE"
+triggerall = command != "holdback" && command != "holddown"
+triggerall = command = "EVADE_NOBUFFER"
 triggerall = statetype = A
 triggerall = pos y<-30 || vel y > 0
 trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && map(BreakPoints) >= 1
@@ -5611,10 +5608,11 @@ trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && ma
 type = ChangeState
 value = 61
 triggerall = command = "holdback"
-triggerall = command = "EVADE"
+triggerall = command = "EVADE_NOBUFFER"
 triggerall = statetype = A
 triggerall = pos y<-30 || vel y > 0
 trigger1 = ctrl && map(AirActions) < const(AirActionMax) || map(EvaCancel) && map(BreakPoints) >= 1
+
 
 ;Evade Forward
 [State -1, Airdash]
@@ -5623,7 +5621,7 @@ value = 65
 triggerall = command != "holdback"
 triggerall = stateno != 66 && command = "EVADE" || stateno = 66 && command = "EVADE_NOBUFFER"
 triggerall = statetype != A && stateno != 65
-trigger1 = ctrl || map(EvaCancel) > 0 && map(BreakPoints) >= 1
+trigger1 = ctrl || map(EvaCancel) > 0 && map(BreakPoints) >= 1 || stateno = [65, 66] && time > 5
 
 ;Evade Back
 [State -1, Airdash]
@@ -5632,7 +5630,7 @@ value = 66
 triggerall = command = "holdback"
 triggerall = stateno != 65 && command = "EVADE" || stateno = 65 && command = "EVADE_NOBUFFER"
 triggerall = statetype != A && stateno != 66
-trigger1 = ctrl || map(EvaCancel) > 0 && map(BreakPoints) >= 1
+trigger1 = ctrl || map(EvaCancel) > 0 && map(BreakPoints) >= 1 || stateno = [65, 66] && time > 5
 
 ;===========================================================================
 ;-------------------------- UNIVERSAL THROWS -------------------------------
@@ -5653,6 +5651,34 @@ trigger1 = ctrl || movecontact && stateno = [600,630] || stateno = [60,61] || (s
 ;------------------------------------------------------------------------------
 [Statedef -2]
 
+;=================================
+;No Ctrl On Enemy Ringout
+;=================================
+[State 52, 3]
+type = CtrlSet
+trigger1 = enemy, stateno = [5305, 5306]
+value = 0
+
+;=================================
+;Air Drift
+;=================================
+[State 0, VelAdd]
+type = VelAdd
+triggerall = ctrl = 1
+triggerall = statetype = A && !map(SJI) && stateno < 1000
+trigger1 = command = "holdfwd" || command = "holdback"
+x = 0.04*(cond(command = "holdfwd" && command != "holdback", 1, -1))
+
+[State 0, VelAdd]
+type = VelAdd
+triggerall = ctrl = 1
+triggerall = map(SJI) && stateno < 1000
+trigger1 = command = "holdfwd" || command = "holdback"
+x = 0.055*(cond(command = "holdfwd" && command != "holdback", 1, -1))
+
+;=================================
+;Gain Stuff
+;=================================
 [State 0, Gain Via Timer]
 type 		= MapSet
 trigger1 	= roundstate = 0
