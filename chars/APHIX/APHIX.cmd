@@ -102,6 +102,7 @@ triggerall = command != "holdback"
 triggerall = stateno != 71 && command = "EVADE" || stateno = 71 && command = "EVADE_NOBUFFER"
 triggerall = stateno != [65,66] && command = "EVADE" || stateno = [65,66] && command = "EVADE_NOBUFFER"
 triggerall = statetype != A && stateno != 65
+triggerall = pos y > -20 || vel y > 0
 trigger1 = map(EvaCancel) > 0 && map(BreakPoints) >= 1 || stateno = 71
 
 ;Evade Back
@@ -112,6 +113,7 @@ triggerall = command = "holdback"
 triggerall = stateno != 71 && command = "EVADE" || stateno = 71 && command = "EVADE_NOBUFFER"
 triggerall = stateno != [65,66] && command = "EVADE" || stateno = [65,66] && command = "EVADE_NOBUFFER"
 triggerall = statetype != A && stateno != 66
+triggerall = pos y > -20 || vel y > 0
 trigger1 = map(EvaCancel) > 0 && map(BreakPoints) >= 1 || stateno = 71
 
 ;PARRY
